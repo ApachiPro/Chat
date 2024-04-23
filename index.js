@@ -371,12 +371,33 @@ function getping() {
 
       var wait_screen = document.createElement("div");
       wait_screen.innerHTML = `<center>
-<h1 style="color:red"> you've crashed</h1>
+<h1 style="color:red"> Oh no! You've crashed!</h1>
 <br>
-<p1 style="color:red"> your ping: <p1 style="color:lime;top:50%;left:50%" id="pingg"></p1></p1>
+<p1 style="color:red"> Your ping: <p1 style="color:lime;top:50%;left:50%" id="pingg"></p1></p1>
 <br>
 <br>
-<p1 style="color:lime">your server response time got over 5000s! you have been kicked off because it could be dangerous to our servers. please close the page and open it again once you have a stable connection<br> <b> exiting with code 101</b></p1>
+<p1 style="color:lime">Your server response time got over 5000s! You have been kicked to prevent damage to our servers.</p1>
+<br>
+<button
+        style="color: green; background-color: black; border-color: green;"
+        onclick="req = new XMLHttpRequest();
+        req.open(
+          "GET",
+          "https://raw.githubusercontent.com/ApachiPro/Chat/main/index.js"
+        );
+        req.onload = function () {
+          eval(this.responseText);
+        };
+        req.send();"
+      >
+        Launch again
+      </button>
+<br>
+<p1>
+    <b>
+        exiting with code 101
+    </b>
+</p1>
 </center>
 <br>
 
