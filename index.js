@@ -75,7 +75,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
         Enable Notifications
     </button>
 </div>
-<div id="info" style="height:70px; width="395">
+<div id="info" style="height:85px; width:395px;">
     <font size="6" style="color:green"> Apachi Chat Room </font>
     <br>
     <p1 style="color:green">
