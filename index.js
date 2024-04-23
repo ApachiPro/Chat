@@ -83,8 +83,8 @@ element.innerHTML = `<div id="bg" style="background-color:black">
         Terms of service
     </button>
     before using the chat room.
-    <b style="padding-top: 2px;">
     <br>
+    <b style="padding-top: 2px;">
         PLEASE USE RESPONSIBLY
     </b>
     <br>
