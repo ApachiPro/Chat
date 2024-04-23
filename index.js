@@ -63,24 +63,27 @@ var element = document.createElement("div");
 element.innerHTML = `<div id="bg" style="background-color:black">
 <title> Apachi Chatroom </title>
 <center>
-    <div id="config">
-      <button class="button" id="config_lib" style="background-color:black;border-color:green;color:green;width:60px;height:30px;top:2%;left:94.8%;position:absolute">
-       Settings
-      </button>
-      <button id="name_changer" style="background-color:black;border-color:green;color:green;width:110px;height:30px;top:6%;left:92%;position:absolute">
+<div id="config">
+    <button class="button" id="config_lib" style="background-color:black;border-color:green;color:green;width:60px;height:30px;top:1%;right:2%;position:absolute">
+        Settings
+    </button>
+    <button id="name_changer" style="background-color:black;border-color:green;color:green;width:110px;height:30px;top:5%;right:2%;position:absolute">
         Change Name
-      </button>
-    </div>
-<font size="5" style="color:green"> Chat room </font><button id="ssd" style="background-color:black;border-color:green;color:green">return</button>
-<button id="sd" style="background-color:black;border-color:green;color:green">enable notifications</button> <br>
+    </button> 
+    <button id="sd" style="background-color:black;border-color:green;color:green;width:150px;height:30px;top:9%;right:2%;position:absolute">
+        Enable Notifications
+    </button>
+</div>
+<font size="5" style="color:green"> Apachi Chat Room </font>
 
 <p1 style="color:green">
     Please read the
-    <button style="border-color:green;background-color:black;color:green" onclick="window.open("https://raw.githack.com/thefatpotato115/Apachi/main/Support/terms.html");">
+    <button style="border-color:green;background-color:black;color:green" onclick="open("https://raw.githack.com/thefatpotato115/Apachi/main/Support/terms.html");">
         Terms of service
     </button>
     before using the chat room.
     <b>
+    <br>
         PLEASE USE RESPONSIBLY
     </b>
     <br>
