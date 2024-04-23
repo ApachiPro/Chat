@@ -82,12 +82,12 @@ element.innerHTML = `<div id="bg" style="background-color:black">
         Terms of service
     </button>
     before using the chat room.
-    <b>
+    <b style="padding-top: 2px;">
     <br>
         PLEASE USE RESPONSIBLY
     </b>
     <br>
-    <b>
+    <b style="padding-top: 2px;">
     Messages reset every seventeen messages.
     </b>
     </p1>
