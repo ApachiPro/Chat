@@ -75,23 +75,25 @@ element.innerHTML = `<div id="bg" style="background-color:black">
         Enable Notifications
     </button>
 </div>
-<font size="6" style="color:green"> Apachi Chat Room </font>
-<br>
-<p1 style="color:green">
-    Please read the
-    <button style="border-color:green;background-color:black;color:green" onclick="open("https://raw.githack.com/thefatpotato115/Apachi/main/Support/terms.html");">
-        Terms of service
-    </button>
-    before using the chat room.
+<div id="info" style="height:70px; width="395">
+    <font size="6" style="color:green"> Apachi Chat Room </font>
     <br>
-    <b style="padding-top: 2px;">
-        PLEASE USE RESPONSIBLY
-    </b>
-    <br>
-    <b style="padding-top: 2px;">
-    Messages reset every seventeen messages.
-    </b>
+    <p1 style="color:green">
+        Please read the
+        <button style="border-color:green;background-color:black;color:green" onclick="open("https://raw.githack.com/thefatpotato115/Apachi/main/Support/terms.html");">
+            Terms of service
+        </button>
+        before using the chat room.
+        <br>
+        <b style="padding-top: 2px;">
+            PLEASE USE RESPONSIBLY
+        </b>
+        <br>
+        <b style="padding-top: 2px;">
+            Messages reset every seventeen messages.
+        </b>
     </p1>
+</div>
 <br>
 <br>
 
