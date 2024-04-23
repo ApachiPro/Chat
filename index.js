@@ -63,7 +63,7 @@ var element = document.createElement("div");
 element.innerHTML = `<div id="bg" style="background-color:black">
 <title> Apachi Chatroom </title>
 <center>
-<img style="top:90%;left:1%;position:absolute" src="https://raw.githack.com/apachipro/chat/main/Resources/logo.png" />
+<img style="top:1%;left:1%;position:absolute" src="https://raw.githack.com/apachipro/chat/main/Resources/logo.png" />
 <div id="config">
     <button class="button" id="config_lib" style="background-color:black;border-color:green;color:green;width:60px;height:30px;top:1%;right:2%;position:absolute">
         Settings
