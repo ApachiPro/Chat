@@ -56,15 +56,12 @@ element.innerHTML = `<div id="bg" style="background-color:black">
       <button id="name_changer" style="background-color:black;border-color:green;color:green;width:110px;height:30px;top:6%;left:92.1%;position:absolute">
         Change Name
       </button> 
-      <button id="ssd" style="background-color:black;border-color:green;color:green;width:110px;height:30px;top:8%;left:92.1%;position:absolute">
-        return
+      <button id="sd" style="background-color:black;border-color:green;color:green;width:110px;height:30px;top:9%;left:92.1%;position:absolute">
+        Enable Notifications
       </button>
     </div>
 	 <font size="5" style="color:green"> Apachi Chat room </font>
    <br>
-	 <button id="sd" style="background-color:black;border-color:green;color:green">
-    enable notifications
-   </button>
    <br>
 
 <p1 style="color:green">
