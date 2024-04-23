@@ -56,7 +56,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
       <button id="name_changer" style="background-color:black;border-color:green;color:green;width:110px;height:30px;top:6%;left:92.1%;position:absolute">
         Change Name
       </button> 
-      <button id="sd" style="background-color:black;border-color:green;color:green;width:110px;height:30px;top:9%;left:92.1%;position:absolute">
+      <button id="sd" style="background-color:black;border-color:green;color:green;width:150px;height:30px;top:10%;left:91%;position:absolute">
         Enable Notifications
       </button>
     </div>
