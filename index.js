@@ -57,8 +57,15 @@ element.innerHTML = `<div id="bg" style="background-color:black">
         Change Name
       </button> 
     </div>
-	 <font size="5" style="color:green"> Chat room </font><button id="ssd" style="background-color:black;border-color:green;color:green">return</button>
-	 <button id="sd" style="background-color:black;border-color:green;color:green">enable notifications</button> <br>
+	 <font size="5" style="color:green"> Apachi Chat room </font>
+   <br>
+   <button id="ssd" style="background-color:black;border-color:green;color:green">
+    return
+   </button>
+	 <button id="sd" style="background-color:black;border-color:green;color:green">
+    enable notifications
+   </button>
+   <br>
 
 <p1 style="color:green">
     Please read the
