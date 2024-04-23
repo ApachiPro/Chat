@@ -105,10 +105,9 @@ element.innerHTML = `<div id="bg" style="background-color:black">
 <br>
 </div>
 </center>
-<img src="https://raw.githubusercontent.com/thefatpotato115/Apachi/main/Resources/add.png">
 <input id="intp" style="background-color:black;border-color:green;color:green;width:80%; position: absolute; top:800px;left:7.5%"> <button id="post" style="background-color:black;border-color:green;color:green;position: absolute;top:800px;left:92.5%;
-" class="button"> SEND </button><button class="button" id="img" style="background-color:black;border-color:green;color:green;position: absolute;top:800px;left:88.5%;
-"> IMAGE </button>
+" class="button"> SEND </button><button class="button" id="img" style="background-color:black;border-color:green;color:green;position: absolute;top:800px;left:20px;
+"> <img src="https://raw.githubusercontent.com/thefatpotato115/Apachi/main/Resources/add.png"> </button>
 
 
 <style>body{ background-color:black} </style>
