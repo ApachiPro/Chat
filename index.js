@@ -74,9 +74,8 @@ element.innerHTML = `<div id="bg" style="background-color:black">
         Enable Notifications
     </button>
 </div>
+<font size="6" style="color:green"> Apachi Chat Room </font>
 <br>
-<font size="5" style="color:green"> Apachi Chat Room </font>
-
 <p1 style="color:green">
     Please read the
     <button style="border-color:green;background-color:black;color:green" onclick="open("https://raw.githack.com/thefatpotato115/Apachi/main/Support/terms.html");">
@@ -95,7 +94,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
 <br>
 <br>
 
-<div style="background-color:rgb(30,30,30);height:85%;bottom:0.5%;position:absolute" id="frame"> <center><b style="color:lime"id="ping">ping: CONNECTING TO SERVER...</b> <p1 style="color:white"><b>APACHI CHAT ROOM </b><p1 style="color:lime" id="connections"> <b> online users: CONNECTING TO SERVER...</b></p1></p1><br><br> <p1 style="color:white" id="stream"> CONNECTING TO SERVER... *may take a while </p1>
+<div style="background-color:rgb(30,30,30);" id="frame"> <center><b style="color:lime"id="ping">ping: CONNECTING TO SERVER...</b> <p1 style="color:white"><b>APACHI CHAT ROOM </b><p1 style="color:lime" id="connections"> <b> online users: CONNECTING TO SERVER...</b></p1></p1><br><br> <p1 style="color:white" id="stream"> CONNECTING TO SERVER... *may take a while </p1>
 <br>
 
 
