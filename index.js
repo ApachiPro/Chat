@@ -53,7 +53,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
       <button class="button" id="config_lib" style="background-color:black;border-color:green;color:green;width:60px;height:30px;top:2%;left:94.8%;position:absolute">
        Settings
       </button>
-      <button id="name_changer" style="background-color:black;border-color:green;color:green;width:110px;height:30px;top:6%;left:92%;position:absolute">
+      <button id="name_changer" style="background-color:black;border-color:green;color:green;width:110px;height:30px;top:6%;left:92.1%;position:absolute">
         Change Name
       </button> 
     </div>
