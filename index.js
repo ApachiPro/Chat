@@ -410,4 +410,4 @@ send.onclick = function() {
   
   
   };
-  getping()
+  getping()}
