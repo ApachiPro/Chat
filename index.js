@@ -73,7 +73,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
     <br>
     <p1 style="color:green" class="txt">
         Please read the
-        <button style="border-color:green;background-color:black;color:green" onclick="window.open:("https://raw.githack.com/thefatpotato115/Apachi/main/Support/terms.html");">
+        <button style="border-color:green;background-color:black;color:green" onclick="window.open('https://raw.githack.com/thefatpotato115/Apachi/main/Support/terms.html'), height:300, length:200">
             Terms of service
         </button>
         before using the chat room.t
