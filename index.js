@@ -121,8 +121,8 @@ element.innerHTML = `<div id="bg" style="background-color:black">
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
-  top: 110%;
-  left: 110%;
+  top: 105%;
+  left: 105%;
 }
 
 .tooltip:hover .tooltiptext {
