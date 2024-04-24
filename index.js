@@ -238,10 +238,10 @@ name_change.onclick = function() {
     "What would you like your name to be? *Please keep it appropriate* *This will not save if you close the tab*",
   );
 };
-let xhr = new XMLHttpRequest();
-xhr.open("GET", config.api);
-xhr.send();
-xhr.onload = function() {
+let xhr2 = new XMLHttpRequest();
+xh2r.open("GET", config.api);
+xh2r.send();
+xh2r.onload = function() {
   log.innerHTML = JSON.parse(this.responseText).texts;
 };
 
