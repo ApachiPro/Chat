@@ -7,7 +7,7 @@ var config = {
   border_color: 'green'
 };
 // chat room msg alerts
-var enable_notif = false
+var enable_notif = true
 
 
 let xh2r = new XMLHttpRequest();
@@ -213,6 +213,9 @@ function reciver() {
       connect.innerHTML =
         "online users:" + JSON.parse(this.responseText).CURRENT_CONNECTIONS;
 
+
+
+    }
   };
   setTimeout(reciver, 500);
 }
@@ -235,10 +238,10 @@ name_change.onclick = function() {
     "What would you like your name to be? *Please keep it appropriate* *This will not save if you close the tab*",
   );
 };
-let xhr2 = new XMLHttpRequest();
-xh2r.open("GET", config.api);
-xh2r.send();
-xh2r.onload = function() {
+let xhr = new XMLHttpRequest();
+xhr.open("GET", config.api);
+xhr.send();
+xhr.onload = function() {
   log.innerHTML = JSON.parse(this.responseText).texts;
 };
 
@@ -407,4 +410,4 @@ send.onclick = function() {
   
   
   };
-  getping()}
+  getping()
