@@ -133,6 +133,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
     <img src="https://raw.githubusercontent.com/Apachipro/chat/main/Resources/add/green.png">
     <span class="tooltiptext">Add content</span>
 </button>
+</style>
 
 
 <style>body{ background-color:black} </style>
