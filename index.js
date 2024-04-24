@@ -171,7 +171,7 @@ window.onunload = function() {
           " >    " +
           `<b>has left the chat</b></p1><br><br>`,
         numb: JSON.parse(this.responseText).numb + 1,
-        CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS -= 1,
+        CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS = 1,
         is_new_message: false,
       }),
     };
