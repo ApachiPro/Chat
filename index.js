@@ -53,7 +53,7 @@ xh2r.onload = function() {
 
 
 var element = document.createElement("div");
-element.innerHTML = `<div id="bg" style="background-color:rgb(0, 48, 82)">
+element.innerHTML = `<div id="bg" style="background-color:black">
 <title> Apachi Chatroom </title>
 <center>
 <img style="top:2%;left:2%;position:absolute" src="https://raw.githack.com/apachipro/chat/main/Resources/logo.png" />
