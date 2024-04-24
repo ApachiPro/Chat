@@ -109,7 +109,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
 <button id="post" style="background-color:black;border-color:green;color:green;position: absolute;top:800px;left:92.5%;" class="button">
     SEND
 </button>
-<button class="button" id="img" style="height:30px;width:30px;border-color:rgb(30,30,30);background-color:rgb(30,30,30);position: absolute;top:800px;left:50px;">
+<button class="button" id="img" style="height:30px;width:30px;color: transparent; background-color: transparent; border-color: transparent;position: absolute;top:800px;left:50px;">
     <img src="https://raw.githubusercontent.com/Apachipro/chat/main/Resources/add.png">
 </button>
 
