@@ -250,77 +250,11 @@ xhr.onload = function() {
 };
 
 
-send.onclick = function() {
-  var new_message = tab.document.getElementById("intp");
-  xhr.open("GET", config.api);
-  xhr.send();
-  xhr.onload = function() {
-    log.innerHTML = JSON.parse(this.responseText).texts;
-    if (JSON.parse(this.responseText).numb > 17) {
-      log.innerHTML = "";
-      console.log("clear");
-      const element = document.querySelector(
-        "#put-request-set-headers .date-updated",
-      );
-      const requestOptions = {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          texts: "< user: " +
-            anonymous_user_id +
-            " >    " +
-            new_message.value +
-            `<br><br>`,
-          numb: 1,
-          is_new_message: true,
-          CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
-        }),
-      };
-      fetch(config.api, requestOptions)
-        .then((response) => response.json())
-        .then((data) => (element.innerHTML = data.updatedAt))
-        .then((log.innerHTML = JSON.parse(this.responseText).texts))
-        .then((new_message.value = ""));
+send.onclick = function() { var new_message = tab.document.getElementById("intp"); xhr.open("GET", config.api); xhr.send(); xhr.onload = function() { log.innerHTML = JSON.parse(this.responseText).texts; if (JSON.parse(this.responseText).numb > 17) { log.innerHTML = ""; console.log("clear"); const element = document.querySelector( "#put-request-set-headers .date-updated", ); const requestOptions = { method: "PUT", headers: { "Content-Type": "application/json", }, body: JSON.stringify({ texts: "< user: " + anonymous_user_id + " > " + new_message.value + `
 
-      //====================== UPDATE CHAT ROOM TEXTS =========================//
+`, numb: 1, is_new_message: true, CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS, }), }; fetch(config.api, requestOptions) .then((response) => response.json()) .then((data) => (element.innerHTML = data.updatedAt)) .then((log.innerHTML = JSON.parse(this.responseText).texts)) .then((new_message.value = "")); //====================== UPDATE CHAT ROOM TEXTS =========================// const xhr = new XMLHttpRequest(); xhr.open(config.api); xhr.onload = function(){ log.innerHTML += new_message.value; } xhr.send() } else { const element = document.querySelector( "#put-request-set-headers .date-updated", ); const requestOptions = { method: "PUT", headers: { "Content-Type": "application/json", }, body: JSON.stringify({ texts: JSON.parse(this.responseText).texts + "< user: " + anonymous_user_id + " > " + new_message.value + `
 
-
-    } else {
-      const element = document.querySelector(
-        "#put-request-set-headers .date-updated",
-      );
-      const requestOptions = {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          texts: JSON.parse(this.responseText).texts +
-            "< user: " +
-            anonymous_user_id +
-            " >    " +
-            new_message.value +
-            `<br><br>`,
-          numb: JSON.parse(this.responseText).numb + 1,
-          is_new_message: true,
-          CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
-        }),
-      };
-
-      fetch(config.api, requestOptions)
-        .then((response) => response.json())
-        .then((data) => (element.innerHTML = data.updatedAt))
-        .then((log.innerHTML = JSON.parse(this.responseText).texts))
-        .then((new_message.value = null));
-
-      //====================== UPDATE CHAT ROOM TEXTS =========================//
-
-    }
-    var n = tab.document.getElementById("intp");
-  };
-};
+`, numb: JSON.parse(this.responseText).numb + 1, is_new_message: true, CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS, }), }; fetch(config.api, requestOptions) .then((response) => response.json()) .then((data) => (element.innerHTML = data.updatedAt)) .then((log.innerHTML = JSON.parse(this.responseText).texts)) .then((new_message.value = null)); //====================== UPDATE CHAT ROOM TEXTS =========================// const xhr = new XMLHttpRequest(); xhr.open(config.api); xhr.onload = function(){ log.innerHTML += new_message.value; } xhr.send() } var n = tab.document.getElementById("intp"); }; };
 
 
 
