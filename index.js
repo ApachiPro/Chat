@@ -116,7 +116,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
 
 <style>body{ background-color:black} </style>
 `;
-var tab = window.open()
+var tab = window
 tab.document.body.appendChild(element);
 var send = tab.document.getElementById("post");
 var log = tab.document.getElementById("stream");
