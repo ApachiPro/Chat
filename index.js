@@ -58,10 +58,10 @@ element.innerHTML = `<div id="bg" style="background-color:rgb(0, 48, 82)">
 <center>
 <img style="top:2%;left:2%;position:absolute" src="https://raw.githack.com/apachipro/chat/main/Resources/logo.png" />
 <div id="config">
-    <button class="button" id="config_lib" style="background-color:black;border-color:green;color:green;width:60px;height:30px;top:1%;right:2%;position:absolute">
+    <button class="button" id="config_lib" style="background-color:black;border-color:green;color:green;width:150px;height:30px;top:1%;right:2%;position:absolute">
         Settings
     </button>
-    <button id="name_changer" style="background-color:black;border-color:green;color:green;width:110px;height:30px;top:5%;right:2%;position:absolute">
+    <button id="name_changer" style="background-color:black;border-color:green;color:green;width:150px;height:30px;top:5%;right:2%;position:absolute">
         Change Name
     </button> 
     <button id="sd" style="background-color:black;border-color:green;color:green;width:150px;height:30px;top:9%;right:2%;position:absolute">
