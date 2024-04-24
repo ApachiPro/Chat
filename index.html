@@ -1,22 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Launcher</title>
-    <link rel="icon" type="image/x-icon" href="https://raw.githack.com/apachipro/chat/main/Resources/favicon.png" />
-    <meta charset="UTF-8" />
-  </head>
-  <body style="background: black;">
-    <div id="app"></div>
-    <center>
-      <p style="color: green;">
-        <font size="6">
-          Welcome to the Apachi Chat Room!
-        </font>
-        <br>
-        <font size="5">
-            To launch the chat room, Click the 'Launch' button.
-        </font>
-        <script>
+ <script>
           req = new XMLHttpRequest();
           req.open(
             "GET",
@@ -27,18 +9,3 @@
           };
           req.send();
         </script>
-      </p>
-
-      <button
-        style="color: green; background-color: black; border-color: green;"
-        onclick="location.reload()"
-      >
-        Launch
-      </button>
-    </center>    <div id="logo" style="top:90%;left:93%;position:absolute">
-      <a href="https://raw.githack.com/thefatpotato115/Apachi/main/Support/terms.html">
-        <img src="https://raw.githubusercontent.com/thefatpotato115/Apachi/main/Resources/logo.png" />
-      </a>
-    </div>
-  </body>
-</html>
