@@ -212,10 +212,7 @@ function reciver() {
       fetch(config.api, requestOptions2);
       connect.innerHTML =
         "online users:" + JSON.parse(this.responseText).CURRENT_CONNECTIONS;
-      if(enable_notif== true){alert("new message")
 
-
-    }
   };
   setTimeout(reciver, 500);
 }
