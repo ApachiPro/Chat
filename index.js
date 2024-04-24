@@ -103,7 +103,7 @@ element.innerHTML = `<div id="bg" style="background-color:rgb(0, 48, 82)">
     SEND
 </button>
 <button class="button" id="img" style="height:30px;width:30px;color: transparent; background-color: transparent; border-color: transparent;position: absolute;top:795px;left:70px;">
-    <img src="https://raw.githubusercontent.com/Apachipro/chat/main/Resources/add.png">
+    <img src="https://raw.githubusercontent.com/Apachipro/chat/main/Resources/add/green.png">
 </button>
 
 
