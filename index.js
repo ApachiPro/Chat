@@ -103,8 +103,35 @@ element.innerHTML = `<div id="bg" style="background-color:black">
 <button id="post" style="background-color:black;border-color:green;color:green;position: absolute;top:800px;left:92.5%;" class="button">
     SEND
 </button>
-<button class="button" id="img" style="height:30px;width:30px;color: transparent; background-color: transparent; border-color: transparent;position: absolute;top:794px;left:70px;">
+<style>
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 100px;
+  background-color: black;
+  color: green;
+  text-align: center;
+  border-radius: 6px;
+  padding: 2px 0;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 110%;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+</style>
+<button class="tooltip" id="add" style="height:30px;width:30px;color: transparent; background-color: transparent; border-color: transparent;position: absolute;top:794px;left:70px;">
     <img src="https://raw.githubusercontent.com/Apachipro/chat/main/Resources/add/green.png">
+    <span class="tooltiptext">Add content</span>
 </button>
 
 
@@ -119,13 +146,13 @@ var connect = tab.document.getElementById("connections");
 var notif = tab.document.getElementById("sd");
 var pingtxt = tab.document.getElementById("ping")
 var conf = tab.document.getElementById("config_lib")
-var plus = tab.document.getElementById("img")
+var plus = tab.document.getElementById("add")
 var txt = tab.document.getElementsByClassName("txt");
 var sending_img = false
 
 plus.onclick = function(){
             
-            plus.innerHTML =`<div style="posistion:absolute"><button id="imgr" style="color:lime;background-color:black;border-color:green"> image </button> </div>`;
+            plus.innerHTML =`<div style="posistion:absolute"><button id="imgr" style="color:lime;background-color:black;border-color:green"> Add Image </button> </div>`;
             var x =document.getElementById("imgr");
             x.onclick = function(){
 
