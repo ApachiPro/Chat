@@ -110,7 +110,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
     SEND
 </button>
 <button class="button" id="img" style="background-color:black;border-color:green;color:green;position: absolute;top:800px;left:50px;">
-    <img src="https://raw.githubusercontent.com/Apachi/main/Resources/add.png">
+    <img src="https://raw.githubusercontent.com/Apachipro/chat/main/Resources/add.png">
 </button>
 
 
