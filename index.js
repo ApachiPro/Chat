@@ -7,7 +7,7 @@ var config = {
   border_color: 'green'
 };
 // chat room msg alerts
-var enable_notif = true
+var enable_notif = false
 
 
 let xh2r = new XMLHttpRequest();
@@ -212,7 +212,7 @@ function reciver() {
       fetch(config.api, requestOptions2);
       connect.innerHTML =
         "online users:" + JSON.parse(this.responseText).CURRENT_CONNECTIONS;
-
+      if(enable_notif== true){alert("new message")
 
 
     }
