@@ -251,174 +251,167 @@ xhr.onload = function() {
 
 
 send.onclick = function() {
-  var new_message = tab.document.getElementById("intp");
-  xhr.open("GET", config.api);
-  xhr.send();
-  xhr.onload = function() {
-    log.innerHTML = JSON.parse(this.responseText).texts;
-    if (JSON.parse(this.responseText).numb > 17) {
-      log.innerHTML = "";
-      console.log("clear");
-      const element = document.querySelector(
-        "#put-request-set-headers .date-updated",
-      );
-      const requestOptions = {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          texts: "< user: " +
-            anonymous_user_id +
-            " >    " +
-            new_message.value +
-            `<br><br>`,
-          numb: 1,
-          is_new_message: true,
-          CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
-        }),
-      };
-      fetch(config.api, requestOptions)
-        .then((response) => response.json())
-        .then((data) => (element.innerHTML = data.updatedAt))
-        .then((log.innerHTML = JSON.parse(this.responseText).texts))
-        .then((new_message.value = ""));
-
-      //====================== UPDATE CHAT ROOM TEXTS =========================//
-
-
-    } else {
-      const element = document.querySelector(
-        "#put-request-set-headers .date-updated",
-      );
-      const requestOptions = {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          texts: JSON.parse(this.responseText).texts +
-            "< user: " +
-            anonymous_user_id +
-            " >    " +
-            new_message.value +
-            `<br><br>`,
-          numb: JSON.parse(this.responseText).numb + 1,
-          is_new_message: true,
-          CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
-        }),
-      };
-
-      fetch(config.api, requestOptions)
-        .then((response) => response.json())
-        .then((data) => (element.innerHTML = data.updatedAt))
-        .then((log.innerHTML = JSON.parse(this.responseText).texts))
-        .then((new_message.value = null));
-
-      //====================== UPDATE CHAT ROOM TEXTS =========================//
-
-    }
-    var n = tab.document.getElementById("intp");
-  };
-};
-
-
-
-//============= PING ===============//
-
-function pingServer(url, callback) {
-  var started = new Date().getTime();
-  var request = new XMLHttpRequest();
-
-  request.onreadystatechange = function() {
-    if (request.readyState === 4) {
-      var ended = new Date().getTime();
-      var milliseconds = ended - started;
-      callback(milliseconds);
-    }
-  };
-
-  request.open("GET", url, true);
-  request.send(null);
-}
-var crash_status
-// Usage
-function getping() {
-  pingServer(config.api, function(ping) {
-    if (ping <= 300) {
-      pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:lime">` + ping + 'ms' + `</p1>`;
-      if (crash_status == true) {
-        tab.document.getElementById("pingg").innerHTML = ping;
-      }
-    } else if (ping >= 300 && ping <= 600) {
-      pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:yellow">` + ping + 'ms' + `</p1>`
-      if (crash_status == true) {
-        tab.document.getElementById("pingg").innerHTML = ping;
-      }
-    } else if (ping >= 600 && ping <= 900) {
-      pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:orange">` + ping + 'ms' + `</p1>`
-      if (crash_status == true) {
-        tab.document.getElementById("pingg").innerHTML = ping;
-      }
-
-    } else if (ping >= 900 && ping <= 1200) {
-      pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:red">` + ping + 'ms' + `</p1>`
-      if (crash_status == true) {
-        tab.document.getElementById("pingg").innerHTML = ping;
-      }
-
-    } else if (ping >= 1200 && ping <= 5000) {
-      pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:darkred">` + ping + 'ms' + `</p1>`;
-      if (crash_status == true) {
-        tab.document.getElementById("pingg").innerHTML = ping;
-      }
-    } else if (ping >= 5000) {
-      pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:black">` + ping + 'ms' + `</p1>`;
-
-      var wait_screen = document.createElement("div");
-      wait_screen.innerHTML = `<center>
-<h1 style="color:red"> Oh no! You've crashed!</h1>
-<br>
-<p1 style="color:red"> Your ping: <p1 style="color:lime;top:50%;left:50%" id="pingg"></p1></p1>
-<br>
-<br>
-<p1 style="color:lime">Your server response time got over 5000s! You have been kicked to prevent damage to our servers.</p1>
-<br>
-<button
-        style="color: green; background-color: black; border-color: green;"
-        onclick="req = new XMLHttpRequest();
-        req.open(
-          "GET",
-          "https://raw.githubusercontent.com/ApachiPro/Chat/main/index.js"
+    var new_message = tab.document.getElementById("intp");
+    xhr.open("GET", config.api);
+    xhr.send();
+    xhr.onload = function() {
+      log.innerHTML = JSON.parse(this.responseText).texts;
+      if (JSON.parse(this.responseText).numb > 17) {
+        log.innerHTML = "";
+        console.log("clear");
+        const element = document.querySelector(
+          "#put-request-set-headers .date-updated",
         );
-        req.onload = function () {
-          eval(this.responseText);
+        const requestOptions = {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            texts: "< user: " +
+              anonymous_user_id +
+              " >    " +
+              new_message.value +
+              `<br><br>`,
+            numb: 1,
+            is_new_message: true,
+            CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
+          }),
         };
-        req.send();"
-      >
-        Launch again
-      </button>
-<br>
-<p1>
-    <b>
-        exiting with code 101
-    </b>
-</p1>
-</center>
-<br>
-
-
-<title>uh oh</title><style> body{background-color:black}</style>`
-      tab.document.body.removeChild(element);
-      tab.document.body.appendChild(wait_screen)
-      tab.document.getElementById("pingg").innerHTML = ping;
-      crash_status = true;
-
-    }
-
-
-    ;
-    setTimeout(getping, 600)
-  })
-};
-getping()
+        fetch(config.api, requestOptions)
+          .then((response) => response.json())
+          .then((data) => (element.innerHTML = data.updatedAt))
+          .then((log.innerHTML = JSON.parse(this.responseText).texts))
+          .then((new_message.value = ""));
+  
+        //====================== UPDATE CHAT ROOM TEXTS =========================//
+      const xhr = new XMLHttpRequest();
+        xhr.open("GET",config.api);
+  xhr.onload = function(){
+  log.innerHTML += new_message.value;
+  
+  }
+  xhr.send()
+  
+      } else {
+        const element = document.querySelector(
+          "#put-request-set-headers .date-updated",
+        );
+        const requestOptions = {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            texts: JSON.parse(this.responseText).texts +
+              "< user: " +
+              anonymous_user_id +
+              " >    " +
+              new_message.value +
+              `<br><br>`,
+            numb: JSON.parse(this.responseText).numb + 1,
+            is_new_message: true,
+            CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
+          }),
+        };
+  
+        fetch(config.api, requestOptions)
+          .then((response) => response.json())
+          .then((data) => (element.innerHTML = data.updatedAt))
+          .then((log.innerHTML = JSON.parse(this.responseText).texts))
+          .then((new_message.value = null));
+  
+        //====================== UPDATE CHAT ROOM TEXTS =========================//
+      const xhr = new XMLHttpRequest();
+        xhr.open("GET",config.api);
+  xhr.onload = function(){
+  log.innerHTML += new_message.value;
+  
+  }
+  xhr.send()
+      }
+      var n = tab.document.getElementById("intp");
+    };
+  };
+  
+  
+  
+  //============= PING ===============//
+  
+  function pingServer(url, callback) {
+    var started = new Date().getTime();
+    var request = new XMLHttpRequest();
+  
+    request.onreadystatechange = function() {
+      if (request.readyState === 4) {
+        var ended = new Date().getTime();
+        var milliseconds = ended - started;
+        callback(milliseconds);
+      }
+    };
+  
+    request.open("GET", url, true);
+    request.send(null);
+  }
+  var crash_status
+  // Usage
+  function getping() {
+    pingServer(config.api, function(ping) {
+      if (ping <= 300) {
+        pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:lime">` + ping + 'ms' + `</p1>`;
+        if (crash_status == true) {
+          tab.document.getElementById("pingg").innerHTML = ping;
+        }
+      } else if (ping >= 300 && ping <= 600) {
+        pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:yellow">` + ping + 'ms' + `</p1>`
+        if (crash_status == true) {
+          tab.document.getElementById("pingg").innerHTML = ping;
+        }
+      } else if (ping >= 600 && ping <= 900) {
+        pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:orange">` + ping + 'ms' + `</p1>`
+        if (crash_status == true) {
+          tab.document.getElementById("pingg").innerHTML = ping;
+        }
+  
+      } else if (ping >= 900 && ping <= 1200) {
+        pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:red">` + ping + 'ms' + `</p1>`
+        if (crash_status == true) {
+          tab.document.getElementById("pingg").innerHTML = ping;
+        }
+  
+      } else if (ping >= 1200 && ping <= 5000) {
+        pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:darkred">` + ping + 'ms' + `</p1>`;
+        if (crash_status == true) {
+          tab.document.getElementById("pingg").innerHTML = ping;
+        }
+      } else if (ping >= 5000) {
+        pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:black">` + ping + 'ms' + `</p1>`;
+  
+        var wait_screen = document.createElement("div");
+        wait_screen.innerHTML = `<center>
+  <h1 style="color:red"> you've crashed</h1>
+  <br>
+  <p1 style="color:red"> your ping: <p1 style="color:lime;top:50%;left:50%" id="pingg"></p1></p1>
+  <br>
+  <br>
+  <p1 style="color:lime">your server response time got over 5000s! you have been kicked off because it could be dangerous to our servers. please close the page and open it again once you have a stable connection<br> <b> exiting with code 101</b></p1>
+  </center>
+  <br>
+  
+  
+  <title>uh oh</title><style> body{background-color:black}</style>`
+        tab.document.body.removeChild(element);
+        tab.document.body.appendChild(wait_screen)
+        tab.document.getElementById("pingg").innerHTML = ping;
+        crash_status = true;
+  
+      }
+  
+  
+      ;
+      setTimeout(getping, 600)
+    })
+  
+  
+  };
+  getping()
