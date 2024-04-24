@@ -9,13 +9,6 @@ var config = {
 // chat room msg alerts
 var enable_notif = true
 
-function constructor(elemet, text, content) {
-
-  var name = tab.document.createElement(elemet)
-  name.innerHTML = ` <p>1</p1>`
-
-
-}
 
 let xh2r = new XMLHttpRequest();
 var rand = Math.floor(Math.random() * 5)
@@ -76,9 +69,9 @@ element.innerHTML = `<div id="bg" style="background-color:rgb(0, 48, 82)">
     </button>
 </div>
 <div id="info" style="height:85px; width:395px;">
-    <font size="6" style="color:green"> Apachi Chat Room </font>
+    <font size="6" style="color:green" class="txt"> Apachi Chat Room </font>
     <br>
-    <p1 style="color:green">
+    <p1 style="color:green" class="txt">
         Please read the
         <button style="border-color:green;background-color:black;color:green" onclick="open("https://raw.githack.com/thefatpotato115/Apachi/main/Support/terms.html");">
             Terms of service
@@ -125,10 +118,12 @@ var connect = tab.document.getElementById("connections");
 var notif = tab.document.getElementById("sd");
 var pingtxt = tab.document.getElementById("ping")
 var conf = tab.document.getElementById("config_lib")
+var txt = tab.document.getElementsByClassName("txt")
 
 function change_cofig(confi) {
-
-
+ if(confi ==1) {
+  config.text_color = "red"
+ }
 }
 
 
@@ -149,7 +144,8 @@ conf.onclick = function() {
 <style> body{background-color:black}</style>
 `
   tab.document.body.appendChild(x)
-  document.getElementsByClassName("button")[0].onclick = change_cofig('text_color')
+  var btns = document.getElementsByClassName("button")
+  btns[0].onclick = change_cofig(1)
 
 }
 
