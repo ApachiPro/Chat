@@ -1,1 +1,1 @@
-Join the chat room at [Apachi Pro . Github . io / Chat](https://apachipro.github.io/chat)
+Join the vibe at [ApachiPro.Github.io/Chat](https://apachipro.github.io/chat)
