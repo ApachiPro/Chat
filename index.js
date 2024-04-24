@@ -73,10 +73,10 @@ element.innerHTML = `<div id="bg" style="background-color:black">
     <br>
     <p1 style="color:green" class="txt">
         Please read the
-        <button style="border-color:green;background-color:black;color:green" onclick="open("https://raw.githack.com/thefatpotato115/Apachi/main/Support/terms.html");">
+        <button style="border-color:green;background-color:black;color:green" onclick="window.open:("https://raw.githack.com/thefatpotato115/Apachi/main/Support/terms.html");">
             Terms of service
         </button>
-        before using the chat room.
+        before using the chat room.t
         <br>
         <b style="padding-top: 2px;">
             PLEASE USE RESPONSIBLY
