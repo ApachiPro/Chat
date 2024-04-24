@@ -48,7 +48,6 @@ xh2r.onload = function() {
     }),
   };
   fetch(config.api, requestOptions);
-
 };
 
 
@@ -64,7 +63,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
     </button>
     <button id="name_changer" style="background-color:black;border-color:green;color:green;width:150px;height:30px;top:5%;right:2%;position:absolute">
         Change Name
-    </button>
+    </button> 
     <button id="sd" style="background-color:black;border-color:green;color:green;width:150px;height:30px;top:9%;right:2%;position:absolute">
         Enable Notifications
     </button>
@@ -119,27 +118,7 @@ var connect = tab.document.getElementById("connections");
 var notif = tab.document.getElementById("sd");
 var pingtxt = tab.document.getElementById("ping")
 var conf = tab.document.getElementById("config_lib")
-var plus = tab.document.getElementById("img")
-var txt = tab.document.getElementsByClassName("txt");
-var sending_img = false
-
-plus.onclick = function(){
-            
-            plus.innerHTML =`<div style="posistion:absolute"><button id="imgr" style="color:lime;background-color:black;border-color:green"> image </button> </div>`;
-            var x =document.getElementById("imgr");
-            x.onclick = function(){
-
-            sending_img = true;
-            link = prompt("Enter img url");
-            tab.document.getElementById("intp").value = `<img src=`+link+`> </img>`
-            send.click()
-
-            }
-
-}
-
-
-
+var txt = tab.document.getElementsByClassName("txt")
 
 function change_cofig(confi) {
  if(confi ==1) {
@@ -204,15 +183,13 @@ window.onunload = function() {
 
 // Example usage:
 
-var reciver_status = {status:"passive",connected:false}
+
 function reciver() {
   let xhr = new XMLHttpRequest();
   xhr.open("GET", config.api);
   xhr.send();
   xhr.onload = function() {
-            
-    reciver_status.connected = true
-            if(JSON.parse(this.responseText).is_new_message==true)
+    Connected_to_server = true
     log.innerHTML = JSON.parse(this.responseText).texts;
 
     if (JSON.parse(this.responseText).is_new_message == true) {
@@ -302,16 +279,16 @@ send.onclick = function() {
           .then((data) => (element.innerHTML = data.updatedAt))
           .then((log.innerHTML = JSON.parse(this.responseText).texts))
           .then((new_message.value = ""));
- 
+  
         //====================== UPDATE CHAT ROOM TEXTS =========================//
       const xhr = new XMLHttpRequest();
         xhr.open("GET",config.api);
   xhr.onload = function(){
   log.innerHTML += new_message.value;
- 
+  
   }
   xhr.send()
- 
+  
       } else {
         const element = document.querySelector(
           "#put-request-set-headers .date-updated",
@@ -333,34 +310,34 @@ send.onclick = function() {
             CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
           }),
         };
- 
+  
         fetch(config.api, requestOptions)
           .then((response) => response.json())
           .then((data) => (element.innerHTML = data.updatedAt))
           .then((log.innerHTML = JSON.parse(this.responseText).texts))
           .then((new_message.value = null));
- 
+  
         //====================== UPDATE CHAT ROOM TEXTS =========================//
       const xhr = new XMLHttpRequest();
         xhr.open("GET",config.api);
   xhr.onload = function(){
   log.innerHTML += new_message.value;
- 
+  
   }
   xhr.send()
       }
       var n = tab.document.getElementById("intp");
     };
   };
- 
- 
- 
+  
+  
+  
   //============= PING ===============//
- 
+  
   function pingServer(url, callback) {
     var started = new Date().getTime();
     var request = new XMLHttpRequest();
- 
+  
     request.onreadystatechange = function() {
       if (request.readyState === 4) {
         var ended = new Date().getTime();
@@ -368,7 +345,7 @@ send.onclick = function() {
         callback(milliseconds);
       }
     };
- 
+  
     request.open("GET", url, true);
     request.send(null);
   }
@@ -391,21 +368,21 @@ send.onclick = function() {
         if (crash_status == true) {
           tab.document.getElementById("pingg").innerHTML = ping;
         }
- 
+  
       } else if (ping >= 900 && ping <= 1200) {
         pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:red">` + ping + 'ms' + `</p1>`
         if (crash_status == true) {
           tab.document.getElementById("pingg").innerHTML = ping;
         }
- 
+  
       } else if (ping >= 1200 && ping <= 5000) {
         pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:darkred">` + ping + 'ms' + `</p1>`;
         if (crash_status == true) {
           tab.document.getElementById("pingg").innerHTML = ping;
         }
-      } else if (ping >= 5000 && ping <=8000 ) {
-        pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:black">` + ping + 'ms' + `</p1>`;}
-                  else if (ping >= 8000 && sending_img == false){
+      } else if (ping >= 5000) {
+        pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:black">` + ping + 'ms' + `</p1>`;
+  
         var wait_screen = document.createElement("div");
         wait_screen.innerHTML = `<center>
   <h1 style="color:red"> you've crashed</h1>
@@ -413,24 +390,24 @@ send.onclick = function() {
   <p1 style="color:red"> your ping: <p1 style="color:lime;top:50%;left:50%" id="pingg"></p1></p1>
   <br>
   <br>
-  <p1 style="color:lime">your server response time got over 8000s! you have been kicked off because it could be dangerous to our servers. please close the page and open it again once you have a stable connection<br> <b> exiting with code 101</b></p1>
+  <p1 style="color:lime">your server response time got over 5000s! you have been kicked off because it could be dangerous to our servers. please close the page and open it again once you have a stable connection<br> <b> exiting with code 101</b></p1>
   </center>
   <br>
- 
- 
+  
+  
   <title>uh oh</title><style> body{background-color:black}</style>`
         tab.document.body.removeChild(element);
         tab.document.body.appendChild(wait_screen)
         tab.document.getElementById("pingg").innerHTML = ping;
         crash_status = true;
- 
+  
       }
- 
- 
+  
+  
       ;
       setTimeout(getping, 600)
     })
- 
- 
+  
+  
   };
   getping()
