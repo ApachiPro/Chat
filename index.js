@@ -121,7 +121,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
-  top: -5px;
+  top: 110%;
   left: 110%;
 }
 
