@@ -207,7 +207,7 @@ conf.onclick = function() {
 
 //when the user leaves
 
-window.onbeforeunload = function() {
+window.onunload= function() {
   let xhr = new XMLHttpRequest();
   xhr.open("GET", config.api);
   xhr.send();
