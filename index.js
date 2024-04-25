@@ -40,7 +40,8 @@ xh2r.onload = function() {
       texts: JSON.parse(this.responseText).texts +
         `<p1 style="color:yellow">` + "< user: " +
         anonymous_user_id +
-        " >    " +
+            ", "+now.toLocaleTimeString()+" >    " +
+            new_message.value +
         `<b>` + msg + `</b></p1><br><br>`,
       numb: JSON.parse(this.responseText).numb += 1,
       CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS += 1,
@@ -91,7 +92,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
 <br>
 <br>
 
-<div style="background-color:rgb(30,30,30);height:90%;width:100%;position:absolute" id="frame"> <center><b style="color:lime"id="ping">ping: CONNECTING TO SERVER...</b> <p1 style="color:white"><b>APACHI CHAT ROOM </b><p1 style="color:lime" id="connections"> <b> online users: CONNECTING TO SERVER...</b></p1></p1><br><br> <p1 style="color:white" id="stream"> CONNECTING TO SERVER... *may take a while </p1>
+<div style="background-color:rgb(30,30,30);height:90%;width:97.5%;position:absolute" id="frame"> <center><b style="color:lime"id="ping">ping: CONNECTING TO SERVER...</b> <p1 style="color:white"><b>APACHI CHAT ROOM </b><p1 style="color:lime" id="connections"> <b> online users: CONNECTING TO SERVER...</b></p1></p1><br><br> <p1 style="color:white" id="stream"> CONNECTING TO SERVER... *may take a while </p1>
 <br>
 
 
