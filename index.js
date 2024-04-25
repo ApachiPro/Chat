@@ -42,7 +42,6 @@ xh2r.onload = function() {
         `<p1 style="color:yellow">` + "< user: " +
         anonymous_user_id +
             ", "+now.toLocaleTimeString()+" >    " +
-            new_message.value +
         `<b>` + msg + `</b></p1><br><br>`,
       numb: JSON.parse(this.responseText).numb += 1,
       CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS += 1,
