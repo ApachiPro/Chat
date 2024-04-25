@@ -315,7 +315,8 @@ function reciver() {
   xhr.onload = function() {
     reciverr.connected = true;
     reciverr.status = "ACTIVE";
-    log.innerHTML = JSON.parse(this.responseText).texts;
+    if(JSON.parse(this.responseText).is_new_message == true){
+    log.innerHTML = JSON.parse(this.responseText).texts;}
 
     if (JSON.parse(this.responseText).is_new_message == true) {
       reciverr.status = "TRIGGERED"
