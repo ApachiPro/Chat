@@ -27,6 +27,7 @@ if (rand == 0) {
 
 xh2r.open("GET", config.api);
 xh2r.send();
+now = new Date();
 xh2r.onload = function() {
   const elementz = document.querySelector(
     "#put-request-set-headers .date-updated",
