@@ -18,7 +18,7 @@ var system_status = {
     "stream": "offline",
 		"numb":0
   },
-	version:'Alpha, v1.0.1'
+	version:'Alpha, v1.1.0 -Hot fix '
 }
 // chat room msg alerts
 var enable_notif = true
@@ -237,6 +237,7 @@ conf.onclick = function() {
 	retur.onclick = function(){
 	  tab.document.body.removeChild(x)
 		tab.document.body.appendChild(element)
+		getping()
 	
 	}
 	
