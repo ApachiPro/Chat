@@ -18,7 +18,7 @@ var system_status = {
     "stream": "offline",
 		"numb":0
   },
-	version:'Alpha, v1.0.0 -Hot fix'
+	version:'Alpha, v1.0.1'
 }
 // chat room msg alerts
 var enable_notif = true
@@ -148,7 +148,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
   visibility: visible;
 }
 </style>
-		<div id="box" style="height:30px;width:30px;color: transparent; background-color: transparent; border-color: transparent;position: absolute;top:794px;left:35px;"></div>
+		<div id="box" style="height:30px;width:30px;color: transparent; background-color: transparent; border-color: transparent;position: absolute;top:754px;left:35px;"></div>
 		
 <button class="tooltip" id="add" style="height:27px;width:30px;color: transparent; background-color: transparent; border-color: transparent;position: absolute;top:794px;left:70px;">
 
@@ -175,7 +175,7 @@ var cntt = tab.document.getElementById("box");
 var sending_img = false;
 ps.onclick = function() {
   console.log("click")
-  cntt.innerHTML = `<button id="imgr" style="background-color:black;border-color:green;color:lime">+img</button>`
+  cntt.innerHTML = `<button id="vidr" style="background-color:black;border-color:green;color:lime;width:50px">+vid</button><br><button id="imgr" style="background-color:black;border-color:green;color:lime;width:50px">+img</button>`
 
   var x = document.getElementById("imgr");
   x.onclick = function() {
@@ -187,6 +187,15 @@ ps.onclick = function() {
 
 
   }
+  var z = document.getElementById("vidr");
+	z.onclick = function(){
+	    sending_img = true;
+   		 cntt.innerHTML = null
+    		 link = prompt("Enter img url");
+    		 tab.document.getElementById("intp").value = `<iframe src=` + link + `> </iframe>`
+   		 send.click();
+	
+	}
 
 
 
@@ -380,7 +389,7 @@ send.onclick = function() {
   xhr.send();
   xhr.onload = function() {
     log.innerHTML = JSON.parse(this.responseText).texts;
-    if (JSON.parse(this.responseText).numb > 17) {
+    if (JSON.parse(this.responseText).numb > 14) {
       log.innerHTML = "";
       console.log("clear");
       const element = document.querySelector(
