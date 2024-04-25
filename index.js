@@ -18,7 +18,7 @@ var system_status = {
     "stream": "offline",
 		"numb":0
   },
-	version:'Alpha, v1.0.0'
+	version:'Alpha, v1.0.0 -Hot fix'
 }
 // chat room msg alerts
 var enable_notif = true
