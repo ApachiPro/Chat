@@ -311,6 +311,7 @@ xhr.onload = function() {
 send.onclick = function() {
   var new_message = tab.document.getElementById("intp");
   xhr.open("GET", config.api);
+	var now = new Date();
   xhr.send();
   xhr.onload = function() {
     log.innerHTML = JSON.parse(this.responseText).texts;
@@ -328,7 +329,7 @@ send.onclick = function() {
         body: JSON.stringify({
           texts: "< user: " +
             anonymous_user_id +
-            " >    " +
+            ", "+now.toLocaleTimeString()+" >    " +
             new_message.value +
             `<br><br>`,
           numb: 1,
@@ -364,7 +365,7 @@ send.onclick = function() {
           texts: JSON.parse(this.responseText).texts +
             "< user: " +
             anonymous_user_id +
-            " >    " +
+            ", "+now.toLocaleTimeString()+" >    " +
             new_message.value +
             `<br><br>`,
           numb: JSON.parse(this.responseText).numb + 1,
@@ -472,4 +473,5 @@ function getping() {
 
 
 };
-getping()
+getping();
+
