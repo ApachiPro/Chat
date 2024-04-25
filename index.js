@@ -77,7 +77,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
         <button style="border-color:green;background-color:black;color:green" onclick="window.open('https://raw.githack.com/thefatpotato115/Apachi/main/Support/terms.html')">
             Terms of service
         </button>
-        before using the chat room.t
+        before using the chat room.
         <br>
         <b style="padding-top: 2px;">
             PLEASE USE RESPONSIBLY
@@ -91,7 +91,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
 <br>
 <br>
 
-<div style="background-color:rgb(30,30,30);height:90%;width:95%;position:absolute" id="frame"> <center><b style="color:lime"id="ping">ping: CONNECTING TO SERVER...</b> <p1 style="color:white"><b>APACHI CHAT ROOM </b><p1 style="color:lime" id="connections"> <b> online users: CONNECTING TO SERVER...</b></p1></p1><br><br> <p1 style="color:white" id="stream"> CONNECTING TO SERVER... *may take a while </p1>
+<div style="background-color:rgb(30,30,30);height:90%;width:100%;position:absolute" id="frame"> <center><b style="color:lime"id="ping">ping: CONNECTING TO SERVER...</b> <p1 style="color:white"><b>APACHI CHAT ROOM </b><p1 style="color:lime" id="connections"> <b> online users: CONNECTING TO SERVER...</b></p1></p1><br><br> <p1 style="color:white" id="stream"> CONNECTING TO SERVER... *may take a while </p1>
 <br>
 
 
