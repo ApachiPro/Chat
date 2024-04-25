@@ -131,7 +131,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
 </style>
 <button class="tooltip" id="add" style="height:30px;width:30px;color: transparent; background-color: transparent; border-color: transparent;position: absolute;top:794px;left:70px;">
     <img src="https://raw.githubusercontent.com/Apachipro/chat/main/Resources/add/green.png">
-    <span class="tooltiptext">Add content</span>
+    <span class="tooltiptext"><button id="imgr" style="background-color:black;color:lime;border-color:green"> Img</button></span>
 </button>
 </style>
 
@@ -149,23 +149,17 @@ var pingtxt = tab.document.getElementById("ping")
 var conf = tab.document.getElementById("config_lib")
 var plus = tab.document.getElementById("add")
 var txt = tab.document.getElementsByClassName("txt");
-var sending_img = false
-
-plus.onclick = function(){
-            
-            plus.innerHTML =`<div style="posistion:absolute"><button id="imgr" style="color:lime;background-color:black;border-color:green"> Add Image </button> </div>`;
-            var x =document.getElementById("imgr");
+var sending_img = false 
+           
+var x =document.getElementById("imgr");
             x.onclick = function(){
-
             sending_img = true;
             link = prompt("Enter img url");
             tab.document.getElementById("intp").value = `<img src=`+link+`> </img>`
             send.click()
 
             }
-
-}
-
+                      
 
 
 
