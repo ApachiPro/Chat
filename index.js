@@ -1,11 +1,11 @@
 var anonymous_user_id = Math.floor(Math.random() * 9999);
 var config = {
-  api: "https://api-generator.retool.com/XZud38/data/1",
+  api: "https://retoolapi.dev/1aDnEH/chatroomdata/1",
   ping_dellay: 2500,
   text_color: 'green',
   background_color: 'black',
   border_color: 'green',
-  messageCap:15
+  messageCap: 15
 };
 var system_status = {
   condition: "offline",
@@ -19,7 +19,7 @@ var system_status = {
     "stream": "offline",
     "numb": 0
   },
-  version: 'Alpha, v1.2.1'
+  version: 'Alpha, v1.0.0 -Hot fix'
 }
 // chat room msg alerts
 var enable_notif = true
@@ -56,13 +56,14 @@ xh2r.onload = function() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        texts:     `<p1 style="color:yellow">` + "< user: " +
+        texts: `<p1 style="color:yellow">` + "< user: " +
           anonymous_user_id +
           ", " + now.toLocaleTimeString() + " >    " +
           `<b>` + msg + `</b></p1><br><br>`,
         numb: JSON.parse(this.responseText).numb = 1,
         CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS += 1,
         is_new_message: true,
+				key:JSON.parse(this.responseText).key
       }),
     };
     fetch(config.api, requestOptions);
@@ -116,7 +117,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
         Change Name
     </button>
     <button id="sd" style="background-color:black;border-color:green;color:green;width:150px;height:30px;top:9%;right:2%;position:absolute">
-        Enable Notifications
+        Change server(s)
     </button>
 </div>
 <div id="info" style="height:85px; width:395px;">
@@ -207,48 +208,162 @@ var txt = tab.document.getElementsByClassName("txt");
 var cntt = tab.document.getElementById("box");
 var sending_img = false;
 var clicked = false;
+
+//=======* change servers *===========//
+
+sd.onclick = function() {
+  sendingg_img = true
+  alert("to change servers you must enter a number between 1-100 anything above is a private server and must require a ket. no spaces the default channle is 1. if data says undifined then it is a new server no ione has been to")
+  var port = prompt("enter channle number");
+  if (port >= 100) {
+    var req = new XMLHttpRequest()
+    req.open('GET', 'https://retoolapi.dev/1aDnEH/chatroomdata/' + port)
+    req.onload = function() {
+
+
+
+      // make new server
+      if (JSON.parse(this.responseText).key == undefined) {
+        alert("you are now creating a private server please memorize the key or copy it down because once you enter it it is irriversible")
+        var entere_key = prompt("Make server key");
+        const element = document.querySelector(
+          "#put-request-set-headers .date-updated",
+        );
+        const requestOptions2 = {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            texts: `<b style="color:red">This is the start of a new server </b>`,
+            numb: 1,
+            CURRENT_CONNECTIONS: 0,
+            is_new_message: true,
+            key: entere_key
+          }),
+        };
+        fetch('https://retoolapi.dev/1aDnEH/chatroomdata/' + port, requestOptions2);
+        config.api = 'https://retoolapi.dev/1aDnEH/chatroomdata/' + port;
+        req.open('GET', config.api)
+        req.onload = function() {
+          log.innerHTML = JSON.parse(this.responseText).texts
+
+        }
+        req.send()
+
+
+      }
+      // enter server key
+      else {
+        var user_key = prompt("Please enter a server key")
+        if (JSON.parse(this.responseText).key == user_key) {
+          alert("success")
+          config.api = 'https://retoolapi.dev/1aDnEH/chatroomdata/' + port
+          req.open('GET', config.api)
+          req.onload = function() {
+            log.innerHTML = JSON.parse(this.responseText).texts
+
+          }
+          req.send()
+
+        } else {
+          alert("failed")
+          config.api = 'https://retoolapi.dev/1aDnEH/chatroomdata/1';
+          req.open('GET', config.api)
+          req.onload = function() {
+            log.innerHTML = JSON.parse(this.responseText).texts
+
+          }
+          req.send()
+        }
+
+      }
+
+    }
+    req.send()
+  }
+
+  //pub servers
+  else {
+    config.api = 'https://retoolapi.dev/1aDnEH/chatroomdata/' + port
+    var req = new XMLHttpRequest()
+    req.open('GET', config.api)
+    req.onload = function() {
+      log.innerHTML = JSON.parse(this.responseText).texts;
+			if(JSON.parse(this.responseText).texts == undefined){
+const element = document.querySelector(
+          "#put-request-set-headers .date-updated",
+        );
+        const requestOptions2 = {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            texts: `<b style="color:red">This is the start of a new server </b>`,
+            numb: 1,
+            CURRENT_CONNECTIONS: 0,
+            is_new_message: true,
+            key:null
+          }),
+        };
+        fetch('https://retoolapi.dev/1aDnEH/chatroomdata/' + port, requestOptions2);
+
+
+}
+			
+
+    }
+    req.send()
+  }
+
+
+}
+
 ps.onclick = function() {
-		if(clicked == true){cntt.innerHTML =``;clicked=false}
-		else{
-		clicked=true
-  console.log("click")
-  cntt.innerHTML = `<button id="vidr" style="background-color:black;border-color:green;color:lime;width:50px">+vid</button><br><button id="imgr" style="background-color:black;border-color:green;color:lime;width:50px">+img</button> <button id="li" style="background-color:black;border-color:green;width:50px;color:lime">+url</button>`
-  var link;
-  var x = document.getElementById("imgr");
-  x.onclick = function() {
-    sending_img = true;
-    cntt.innerHTML = null
-    link = prompt("Enter img url");
-    if (link !== "") {
-      tab.document.getElementById("intp").value = `<img src=` + link + `> </img>`
-      send.click();
+  if (clicked == true) {
+    cntt.innerHTML = ``;
+    clicked = false
+  } else {
+    clicked = true
+    console.log("click")
+    cntt.innerHTML = `<button id="vidr" style="background-color:black;border-color:green;color:lime;width:50px">+vid</button><br><button id="imgr" style="background-color:black;border-color:green;color:lime;width:50px">+img</button> <button id="li" style="background-color:black;border-color:green;width:50px;color:lime">+url</button>`
+    var link;
+    var x = document.getElementById("imgr");
+    x.onclick = function() {
+      sending_img = true;
+      cntt.innerHTML = null
+      link = prompt("Enter img url");
+      if (link !== "") {
+        tab.document.getElementById("intp").value = `<img src=` + link + `> </img>`
+        send.click();
+      }
+
+
+    }
+    var z = document.getElementById("vidr");
+    z.onclick = function() {
+      sending_img = true;
+      cntt.innerHTML = null
+      link = prompt("Enter img url");
+      if (link !== "") {
+        tab.document.getElementById("intp").value = `<iframe src=` + link + `> </iframe>`
+        send.click();
+      }
+
     }
 
-
-  }
-  var z = document.getElementById("vidr");
-  z.onclick = function() {
-    sending_img = true;
-    cntt.innerHTML = null
-    link = prompt("Enter img url");
-    if (link !== "") {
-      tab.document.getElementById("intp").value = `<iframe src=` + link + `> </iframe>`
-      send.click();
-    }
-
-  }
-	
-	  var y = document.getElementById("li");
-  	y.onclick = function() {
-    sending_img = true;
-    cntt.innerHTML = null
-    link = prompt("Enter url");
+    var y = document.getElementById("li");
+    y.onclick = function() {
+      sending_img = true;
+      cntt.innerHTML = null
+      link = prompt("Enter url");
       tab.document.getElementById("intp").value = `<a href=` + link + `> eee</a>`
       send.click();
-    
 
+
+    }
   }
-	}
 
 
 }
@@ -328,7 +443,7 @@ conf.onclick = function() {
 
 //when the user leaves
 
-window.addEventListener('beforeunload', function (e) {
+window.addEventListener('beforeunload', function(e) {
   let xhr = new XMLHttpRequest();
   xhr.open("GET", config.api);
   xhr.send();
@@ -347,9 +462,10 @@ window.addEventListener('beforeunload', function (e) {
           anonymous_user_id +
           " >    " +
           `<b>has left the chat</b></p1><br><br>`,
-        numb:  1,
+        numb: 1,
         CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS - 1,
         is_new_message: true,
+				key:JSON.parse(this.responseText).key
       }),
     };
     fetch(config.api, requestOptions);
@@ -389,6 +505,7 @@ function reciver() {
           numb: JSON.parse(this.responseText).numb,
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
           is_new_message: false,
+						key:JSON.parse(this.responseText).key
         }),
       };
 
@@ -430,14 +547,13 @@ xhr.onload = function() {
 
 
 send.onclick = function() {
-var value;
-	if(sending_img == true){
-		value=3
-	}
-	else{
-	value=1
-	}
-		
+  var value;
+  if (sending_img == true) {
+    value = 3
+  } else {
+    value = 1
+  }
+
   var new_message = tab.document.getElementById("intp");
   xhr.open("GET", config.api);
   var now = new Date();
@@ -464,6 +580,7 @@ var value;
           numb: value,
           is_new_message: true,
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
+						key:JSON.parse(this.responseText).key
         }),
       };
       fetch(config.api, requestOptions)
@@ -500,6 +617,7 @@ var value;
           numb: JSON.parse(this.responseText).numb + value,
           is_new_message: true,
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
+						key:JSON.parse(this.responseText).key
         }),
       };
 
