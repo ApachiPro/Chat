@@ -20,7 +20,7 @@ var system_status = {
     "stream": "offline",
     "numb": 0
   },
-  version: 'Releace, v1.0.1 -Hot fix'
+  version: 'Releace, v1.0.2 -Hot fix'
 }
 // chat room msg alerts
 var enable_notif = true
@@ -143,7 +143,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
 <br>
 <br>
 <center>
-<div style="background-color:rgb(30,30,30);height:90%;width:97.5%" id="frame"> <center><b style="color:lime"id="ping">ping: CONNECTING TO SERVER...</b> <p1 style="color:white"><b>APACHI CHAT ROOM </b><p1 style="color:lime" id="connections"> <b> online users: CONNECTING TO SERVER...</b></p1><b style="color:yellow" id="port">Port:CONNECTING TO SERVER</b></p1><br><br> <p1 style="color:white" id="stream"> CONNECTING TO SERVER... *may take a while </p1>
+<div style="background-color:rgb(30,30,30);height:87%;width:97.5%" id="frame"> <center><b style="color:lime"id="ping">ping: CONNECTING TO SERVER...</b> <p1 style="color:white"><b>APACHI CHAT ROOM </b><p1 style="color:lime" id="connections"> <b> online users: CONNECTING TO SERVER...</b></p1><b style="color:yellow" id="port">Port:CONNECTING TO SERVER</b></p1><br><br> <p1 style="color:white" id="stream"> CONNECTING TO SERVER... *may take a while </p1>
 <br></center>
 
 
@@ -217,6 +217,7 @@ sd.onclick = function() {
   sendingg_img = true
   alert("to change servers you must enter a number between 1-100 anything above is a private server and must require a ket. no spaces the default channle is 1. if data says undifined then it is a new server no ione has been to")
   var port = prompt("enter channle number");
+	if (port == null || port == ""){alert("canceled")} else{
   if (port >= 100) {
     var req = new XMLHttpRequest()
     req.open('GET', 'https://retoolapi.dev/1aDnEH/chatroomdata/' + port)
@@ -226,8 +227,9 @@ sd.onclick = function() {
 
       // make new server
       if (JSON.parse(this.responseText).key == undefined) {
-        alert("you are now creating a private server please memorize the key or copy it down because once you enter it it is irriversible")
+        alert("you are now creating a private server please memorize the key or copy it down because once you enter it is irriversible. unless you click cancel on next prompt")
         var entere_key = prompt("Make server key");
+				if(entere_key == "" || entere_key == null){alert("canceling")} else{
         const element = document.querySelector(
           "#put-request-set-headers .date-updated",
         );
@@ -256,7 +258,7 @@ sd.onclick = function() {
         req.send()
 
 
-      }
+      }}
       // enter server key
       else {
         var user_key = prompt("Please enter a server key")
@@ -326,7 +328,7 @@ const element = document.querySelector(
   }
 
 
-}
+}}
 
 ps.onclick = function() {
   if (clicked == true) {
@@ -388,7 +390,7 @@ function change_cofig(confi) {
 conf.onclick = function() {
   tab.document.body.removeChild(element)
   var x = tab.document.createElement('div')
-  x.innerHTML = `<div class="collum"><b style="color:lime"> <center> De-bug ui*developer purposes only.</b>
+  x.innerHTML = `<div class="collum"><b style="color:lime"> <center> De-bug ui *developer purposes only.</b>
 <br>
 <button id="return" style="color:lime;background-color:black;border-color:white"> ---> RETURN <---</button>
 <br>
@@ -399,6 +401,11 @@ conf.onclick = function() {
 <b class="line" id="version"> Server:</b><br>
 <b class="line" id="system"> System:</b><br>
 <b class="line" style="color:white">Version: </b>
+<h1 style="color:white">Bug tracker</h1> <p1 style="color:white">/priority list closer to red = severity</p1><br>
+<br>
+<p1 style="color:yellow"> Weird current connections glich with private servers -known bug</p1><br>
+<p1 style="color:yellow"> current connections acting up -working on fix</p1><br>
+<p1 style="color:lime"> thats it :/</p1><br>
 <center>
 </div>
 
