@@ -4,7 +4,8 @@ var config = {
   ping_dellay: 2500,
   text_color: 'green',
   background_color: 'black',
-  border_color: 'green'
+  border_color: 'green',
+  messageCap:15
 };
 var system_status = {
   condition: "offline",
@@ -16,9 +17,9 @@ var system_status = {
     "pinger": "offline",
 
     "stream": "offline",
-		"numb":0
+    "numb": 0
   },
-	version:'Alpha, v1.1.1 -Hot fix '
+  version: 'Alpha, v1.0.0 -Hot fix'
 }
 // chat room msg alerts
 var enable_notif = true
@@ -43,28 +44,60 @@ xh2r.open("GET", config.api);
 xh2r.send();
 now = new Date()
 xh2r.onload = function() {
-  const elementz = document.querySelector(
-    "#put-request-set-headers .date-updated",
-  );
-  const requestOptions = {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      texts: JSON.parse(this.responseText).texts +
-        `<p1 style="color:yellow">` + "< user: " +
-        anonymous_user_id +
-        ", " + now.toLocaleTimeString() + " >    " +
-        `<b>` + msg + `</b></p1><br><br>`,
-      numb: JSON.parse(this.responseText).numb += 1,
-      CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS += 1,
-      is_new_message: true,
-    }),
-  };
-  fetch(config.api, requestOptions);
-	system_status.conditions.server = "online"
-	system_status.conditions.stream = "online"
+
+
+  if (JSON.parse(this.responseText).numb >= config.messageCap) {
+    const elementz = document.querySelector(
+      "#put-request-set-headers .date-updated",
+    );
+    const requestOptions = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        texts:     `<p1 style="color:yellow">` + "< user: " +
+          anonymous_user_id +
+          ", " + now.toLocaleTimeString() + " >    " +
+          `<b>` + msg + `</b></p1><br><br>`,
+        numb: JSON.parse(this.responseText).numb = 1,
+        CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS += 1,
+        is_new_message: true,
+      }),
+    };
+    fetch(config.api, requestOptions);
+    system_status.conditions.server = "online"
+    system_status.conditions.stream = "online"
+  } else {
+
+    const elementz = document.querySelector(
+      "#put-request-set-headers .date-updated",
+    );
+    const requestOptions = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        texts: JSON.parse(this.responseText).texts +
+          `<p1 style="color:yellow">` + "< user: " +
+          anonymous_user_id +
+          ", " + now.toLocaleTimeString() + " >    " +
+          `<b>` + msg + `</b></p1><br><br>`,
+        numb: JSON.parse(this.responseText).numb += 1,
+        CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS += 1,
+        is_new_message: true,
+      }),
+    };
+    fetch(config.api, requestOptions);
+    system_status.conditions.server = "online"
+    system_status.conditions.stream = "online"
+
+
+
+
+
+  }
 
 };
 
@@ -101,15 +134,15 @@ element.innerHTML = `<div id="bg" style="background-color:black">
         </b>
         <br>
         <b style="padding-top: 2px;">
-            Messages reset every seventeen messages.
+            Messages reset every 15 messages.
         </b>
     </p1>
 </div>
 <br>
 <br>
-
-<div style="background-color:rgb(30,30,30);height:90%;width:97.5%;position:absolute" id="frame"> <center><b style="color:lime"id="ping">ping: CONNECTING TO SERVER...</b> <p1 style="color:white"><b>APACHI CHAT ROOM </b><p1 style="color:lime" id="connections"> <b> online users: CONNECTING TO SERVER...</b></p1></p1><br><br> <p1 style="color:white" id="stream"> CONNECTING TO SERVER... *may take a while </p1>
-<br>
+<center>
+<div style="background-color:rgb(30,30,30);height:90%;width:97.5%" id="frame"> <center><b style="color:lime"id="ping">ping: CONNECTING TO SERVER...</b> <p1 style="color:white"><b>APACHI CHAT ROOM </b><p1 style="color:lime" id="connections"> <b> online users: CONNECTING TO SERVER...</b></p1></p1><br><br> <p1 style="color:white" id="stream"> CONNECTING TO SERVER... *may take a while </p1>
+<br></center>
 
 
 
@@ -148,7 +181,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
   visibility: visible;
 }
 </style>
-		<div id="box" style="height:30px;width:30px;color: transparent; background-color: transparent; border-color: transparent;position: absolute;top:754px;left:35px;"></div>
+		<div id="box" style="height:30px;width:30px;color: transparent; background-color: transparent; border-color: transparent;position: absolute;top:734px;left:35px;"></div>
 		
 <button class="tooltip" id="add" style="height:27px;width:30px;color: transparent; background-color: transparent; border-color: transparent;position: absolute;top:794px;left:70px;">
 
@@ -173,30 +206,49 @@ var ps = document.getElementById("add")
 var txt = tab.document.getElementsByClassName("txt");
 var cntt = tab.document.getElementById("box");
 var sending_img = false;
+var clicked = false;
 ps.onclick = function() {
+		if(clicked == true){cntt.innerHTML =``;clicked=false}
+		else{
+		clicked=true
   console.log("click")
-  cntt.innerHTML = `<button id="vidr" style="background-color:black;border-color:green;color:lime;width:50px">+vid</button><br><button id="imgr" style="background-color:black;border-color:green;color:lime;width:50px">+img</button>`
-
+  cntt.innerHTML = `<button id="vidr" style="background-color:black;border-color:green;color:lime;width:50px">+vid</button><br><button id="imgr" style="background-color:black;border-color:green;color:lime;width:50px">+img</button> <button id="li" style="background-color:black;border-color:green;width:50px;color:lime">+url</button>`
+  var link;
   var x = document.getElementById("imgr");
   x.onclick = function() {
     sending_img = true;
     cntt.innerHTML = null
     link = prompt("Enter img url");
-    tab.document.getElementById("intp").value = `<img src=` + link + `> </img>`
-    send.click();
+    if (link !== "") {
+      tab.document.getElementById("intp").value = `<img src=` + link + `> </img>`
+      send.click();
+    }
 
 
   }
   var z = document.getElementById("vidr");
-	z.onclick = function(){
-	    sending_img = true;
-   		 cntt.innerHTML = null
-    		 link = prompt("Enter img url");
-    		 tab.document.getElementById("intp").value = `<iframe src=` + link + `> </iframe>`
-   		 send.click();
-	
-	}
+  z.onclick = function() {
+    sending_img = true;
+    cntt.innerHTML = null
+    link = prompt("Enter img url");
+    if (link !== "") {
+      tab.document.getElementById("intp").value = `<iframe src=` + link + `> </iframe>`
+      send.click();
+    }
 
+  }
+	
+	  var y = document.getElementById("li");
+  	y.onclick = function() {
+    sending_img = true;
+    cntt.innerHTML = null
+    link = prompt("Enter url");
+      tab.document.getElementById("intp").value = `<a href=` + link + `> eee</a>`
+      send.click();
+    
+
+  }
+	}
 
 
 }
@@ -233,49 +285,44 @@ conf.onclick = function() {
 `
   tab.document.body.appendChild(x)
   var lines = document.getElementsByClassName("line")
-	var retur = document.getElementById("return")
-	retur.onclick = function(){
-	  tab.document.body.removeChild(x)
-		tab.document.body.appendChild(element)
-		
-	
-	}
-	
-	function update_lines(){
-	lines[0].innerHTML = "Pinger: "+system_status.conditions.pinger
-	if(system_status.conditions.stream == "online"){
-			lines[0].style="color:lime"
-	}
-	else{
-		lines[0].style="color:red"
-	}
-		lines[1].innerHTML = "Reciver: "+system_status.conditions.pinger
-	if(system_status.conditions.reciver == "online"){
-			lines[1].style="color:lime"
-	}
-	else{
-		lines[1].style="color:red"
-	}
-		lines[2].innerHTML = "Server: "+system_status.conditions.pinger
-	if(system_status.conditions.server == "online"){
-			lines[2].style="color:lime"
-	}
-	else{
-		lines[2].style="color:red"
-	}
-		lines[3].innerHTML = "stream: "+system_status.conditions.stream
-	if(system_status.conditions.stream == "online"){
-			lines[3].style="color:lime"
-	}
-	else{
-		lines[3].style="color:red"
-	}
-	setInterval(update_lines,500)
-	}
-	
-	update_lines();
-	
-	lines[4].innerHTML += system_status.version
+  var retur = document.getElementById("return")
+  retur.onclick = function() {
+    tab.document.body.removeChild(x)
+    tab.document.body.appendChild(element)
+
+  }
+
+  function update_lines() {
+    lines[0].innerHTML = "Pinger: " + system_status.conditions.pinger
+    if (system_status.conditions.stream == "online") {
+      lines[0].style = "color:lime"
+    } else {
+      lines[0].style = "color:red"
+    }
+    lines[1].innerHTML = "Reciver: " + system_status.conditions.pinger
+    if (system_status.conditions.reciver == "online") {
+      lines[1].style = "color:lime"
+    } else {
+      lines[1].style = "color:red"
+    }
+    lines[2].innerHTML = "Server: " + system_status.conditions.pinger
+    if (system_status.conditions.server == "online") {
+      lines[2].style = "color:lime"
+    } else {
+      lines[2].style = "color:red"
+    }
+    lines[3].innerHTML = "stream: " + system_status.conditions.stream
+    if (system_status.conditions.stream == "online") {
+      lines[3].style = "color:lime"
+    } else {
+      lines[3].style = "color:red"
+    }
+    setInterval(update_lines, 500)
+  }
+
+  update_lines();
+
+  lines[4].innerHTML += system_status.version
 
 }
 
@@ -325,8 +372,9 @@ function reciver() {
   xhr.onload = function() {
     reciverr.connected = true;
     reciverr.status = "ACTIVE";
-    if(JSON.parse(this.responseText).is_new_message == true){
-    log.innerHTML = JSON.parse(this.responseText).texts;}
+    if (JSON.parse(this.responseText).is_new_message == true) {
+      log.innerHTML = JSON.parse(this.responseText).texts;
+    }
 
     if (JSON.parse(this.responseText).is_new_message == true) {
       reciverr.status = "TRIGGERED"
@@ -351,7 +399,7 @@ function reciver() {
         "online users:" + JSON.parse(this.responseText).CURRENT_CONNECTIONS;
       reciverr.status = "ACTIVE";
       system_status.conditions.reciver = "online"
-			system_status.conditions.stream = "online"
+      system_status.conditions.stream = "online"
     }
   };
   setTimeout(reciver, 500);
@@ -384,13 +432,21 @@ xhr.onload = function() {
 
 
 send.onclick = function() {
+var value;
+	if(sending_img == true){
+		value=3
+	}
+	else{
+	value=1
+	}
+		
   var new_message = tab.document.getElementById("intp");
   xhr.open("GET", config.api);
   var now = new Date();
   xhr.send();
   xhr.onload = function() {
     log.innerHTML = JSON.parse(this.responseText).texts;
-    if (JSON.parse(this.responseText).numb > 14) {
+    if (JSON.parse(this.responseText).numb >= config.messageCap) {
       log.innerHTML = "";
       console.log("clear");
       const element = document.querySelector(
@@ -407,7 +463,7 @@ send.onclick = function() {
             ", " + now.toLocaleTimeString() + " >    " +
             new_message.value +
             `<br><br>`,
-          numb: 1,
+          numb: value,
           is_new_message: true,
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
         }),
@@ -443,7 +499,7 @@ send.onclick = function() {
             ", " + now.toLocaleTimeString() + " >    " +
             new_message.value +
             `<br><br>`,
-          numb: JSON.parse(this.responseText).numb + 1,
+          numb: JSON.parse(this.responseText).numb + value,
           is_new_message: true,
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
         }),
@@ -542,7 +598,8 @@ function getping() {
     }
 
 
-    ;system_status.conditions.pinger = "online"
+    ;
+    system_status.conditions.pinger = "online"
     setTimeout(getping, 600)
   })
 
