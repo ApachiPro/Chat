@@ -19,7 +19,7 @@ var system_status = {
     "stream": "offline",
     "numb": 0
   },
-  version: 'Alpha, v1.0.0 -Hot fix'
+  version: 'Alpha, v1.2.0 -Mega Fix'
 }
 // chat room msg alerts
 var enable_notif = true
