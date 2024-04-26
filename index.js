@@ -20,7 +20,7 @@ var system_status = {
     "stream": "offline",
     "numb": 0
   },
-  version: 'Releace, v1.0.2 -Hot fix'
+  version: 'Releace, v1.0.3 -Height fix(s)'
 }
 // chat room msg alerts
 var enable_notif = true
