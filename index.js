@@ -20,7 +20,7 @@ var system_status = {
     "stream": "offline",
     "numb": 0
   },
-  version: 'Releace, v1.0.3 -Height fix(s)'
+  version: 'Releace, v1.0.4 -quick fix'
 }
 // chat room msg alerts
 var enable_notif = true
@@ -64,7 +64,7 @@ xh2r.onload = function() {
         numb: JSON.parse(this.responseText).numb = 1,
         CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS += 1,
         is_new_message: true,
-				key:JSON.parse(this.responseText).key
+	key:JSON.parse(this.responseText).key
       }),
     };
     fetch(config.api, requestOptions);
@@ -89,6 +89,7 @@ xh2r.onload = function() {
         numb: JSON.parse(this.responseText).numb += 1,
         CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS += 1,
         is_new_message: true,
+	key:JSON.parse(this.responseText).key
       }),
     };
     fetch(config.api, requestOptions);
@@ -480,7 +481,7 @@ window.addEventListener('beforeunload', function(e) {
         numb: 1,
         CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS - 1,
         is_new_message: true,
-				key:JSON.parse(this.responseText).key
+	key:JSON.parse(this.responseText).key
       }),
     };
     fetch(config.api, requestOptions);
@@ -520,7 +521,7 @@ function reciver() {
           numb: JSON.parse(this.responseText).numb,
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
           is_new_message: false,
-						key:JSON.parse(this.responseText).key
+	 key:JSON.parse(this.responseText).key
         }),
       };
 
@@ -595,7 +596,7 @@ send.onclick = function() {
           numb: value,
           is_new_message: true,
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
-						key:JSON.parse(this.responseText).key
+	 key:JSON.parse(this.responseText).key
         }),
       };
       fetch(config.api, requestOptions)
