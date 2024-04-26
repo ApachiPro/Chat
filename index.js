@@ -5,7 +5,8 @@ var config = {
   text_color: 'green',
   background_color: 'black',
   border_color: 'green',
-  messageCap: 15
+  messageCap: 15,
+	port:1
 };
 var system_status = {
   condition: "offline",
@@ -19,12 +20,12 @@ var system_status = {
     "stream": "offline",
     "numb": 0
   },
-  version: 'Release, v1.0.0 -Private servers'
+  version: 'Alpha, v1.0.0 -Hot fix'
 }
 // chat room msg alerts
 var enable_notif = true
 
-
+function hello(){
 let xh2r = new XMLHttpRequest();
 var rand = Math.floor(Math.random() * 5)
 var msg;
@@ -102,8 +103,8 @@ xh2r.onload = function() {
 
 };
 
-
-
+}
+hello()
 var element = document.createElement("div");
 element.innerHTML = `<div id="bg" style="background-color:black">
 <title> Apachi Chatroom </title>
@@ -142,7 +143,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
 <br>
 <br>
 <center>
-<div style="background-color:rgb(30,30,30);height:90%;width:97.5%" id="frame"> <center><b style="color:lime"id="ping">ping: CONNECTING TO SERVER...</b> <p1 style="color:white"><b>APACHI CHAT ROOM </b><p1 style="color:lime" id="connections"> <b> online users: CONNECTING TO SERVER...</b></p1></p1><br><br> <p1 style="color:white" id="stream"> CONNECTING TO SERVER... *may take a while </p1>
+<div style="background-color:rgb(30,30,30);height:90%;width:97.5%" id="frame"> <center><b style="color:lime"id="ping">ping: CONNECTING TO SERVER...</b> <p1 style="color:white"><b>APACHI CHAT ROOM </b><p1 style="color:lime" id="connections"> <b> online users: CONNECTING TO SERVER...</b></p1><b style="color:yellow" id="port">Port:CONNECTING TO SERVER</b></p1><br><br> <p1 style="color:white" id="stream"> CONNECTING TO SERVER... *may take a while </p1>
 <br></center>
 
 
@@ -206,6 +207,7 @@ var conf = tab.document.getElementById("config_lib")
 var ps = document.getElementById("add")
 var txt = tab.document.getElementsByClassName("txt");
 var cntt = tab.document.getElementById("box");
+var porter = tab.document.getElementById("port");
 var sending_img = false;
 var clicked = false;
 
@@ -219,8 +221,8 @@ sd.onclick = function() {
     var req = new XMLHttpRequest()
     req.open('GET', 'https://retoolapi.dev/1aDnEH/chatroomdata/' + port)
     req.onload = function() {
-
-
+	
+	
 
       // make new server
       if (JSON.parse(this.responseText).key == undefined) {
@@ -243,11 +245,13 @@ sd.onclick = function() {
           }),
         };
         fetch('https://retoolapi.dev/1aDnEH/chatroomdata/' + port, requestOptions2);
+				config.port = port
         config.api = 'https://retoolapi.dev/1aDnEH/chatroomdata/' + port;
         req.open('GET', config.api)
         req.onload = function() {
-          log.innerHTML = JSON.parse(this.responseText).texts
-
+          log.innerHTML = JSON.parse(this.responseText).texts;
+					hello()
+					
         }
         req.send()
 
@@ -259,9 +263,11 @@ sd.onclick = function() {
         if (JSON.parse(this.responseText).key == user_key) {
           alert("success")
           config.api = 'https://retoolapi.dev/1aDnEH/chatroomdata/' + port
+					config.port = port
           req.open('GET', config.api)
           req.onload = function() {
-            log.innerHTML = JSON.parse(this.responseText).texts
+            log.innerHTML = JSON.parse(this.responseText).texts;
+						hello();
 
           }
           req.send()
@@ -269,6 +275,7 @@ sd.onclick = function() {
         } else {
           alert("failed")
           config.api = 'https://retoolapi.dev/1aDnEH/chatroomdata/1';
+					config.port = 1
           req.open('GET', config.api)
           req.onload = function() {
             log.innerHTML = JSON.parse(this.responseText).texts
@@ -290,6 +297,7 @@ sd.onclick = function() {
     req.open('GET', config.api)
     req.onload = function() {
       log.innerHTML = JSON.parse(this.responseText).texts;
+			hello()
 			if(JSON.parse(this.responseText).texts == undefined){
 const element = document.querySelector(
           "#put-request-set-headers .date-updated",
@@ -308,7 +316,7 @@ const element = document.querySelector(
           }),
         };
         fetch('https://retoolapi.dev/1aDnEH/chatroomdata/' + port, requestOptions2);
-
+				hello()
 
 }
 			
@@ -662,6 +670,7 @@ function pingServer(url, callback) {
 var crash_status
 // Usage
 function getping() {
+porter.innerHTML = " Port: "+config.port
   pingServer(config.api, function(ping) {
     if (ping <= 300) {
       pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:lime">` + ping + 'ms' + `</p1>`;
