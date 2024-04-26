@@ -19,7 +19,7 @@ var system_status = {
     "stream": "offline",
     "numb": 0
   },
-  version: 'Alpha, v1.2.0 -Mega Fix'
+  version: 'Alpha, v1.2.1'
 }
 // chat room msg alerts
 var enable_notif = true
@@ -328,7 +328,7 @@ conf.onclick = function() {
 
 //when the user leaves
 
-window.onunload = function() {
+window.addEventListener('beforeunload', function (e) {
   let xhr = new XMLHttpRequest();
   xhr.open("GET", config.api);
   xhr.send();
@@ -347,16 +347,14 @@ window.onunload = function() {
           anonymous_user_id +
           " >    " +
           `<b>has left the chat</b></p1><br><br>`,
-        numb: JSON.parse(this.responseText).numb + 1,
+        numb:  1,
         CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS - 1,
         is_new_message: true,
       }),
     };
     fetch(config.api, requestOptions);
   };
-}
-
-
+});
 
 // Example usage:
 
