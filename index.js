@@ -20,7 +20,7 @@ var system_status = {
     "stream": "offline",
     "numb": 0
   },
-  version: 'Releace, v1.0.4 -quick fix'
+  version: 'Releace, v1.0.5 -alert edits'
 }
 // chat room msg alerts
 var enable_notif = true
@@ -216,7 +216,7 @@ var clicked = false;
 
 sd.onclick = function() {
   sendingg_img = true
-  alert("to change servers you must enter a number between 1-100 anything above is a private server and must require a ket. no spaces the default channle is 1. if data says undifined then it is a new server no ione has been to")
+  alert("to change servers you must enter a number between 1-100 anything above is a private server and must require a ket. no spaces the default channle is 1. private demo server is 100 and key is demo")
   var port = prompt("enter channle number");
 	if (port == null || port == ""){alert("canceled")} else{
   if (port >= 100) {
