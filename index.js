@@ -250,6 +250,7 @@ sd.onclick = function() {
         fetch('https://retoolapi.dev/1aDnEH/chatroomdata/' + port, requestOptions2);
 				config.port = port
         config.api = 'https://retoolapi.dev/1aDnEH/chatroomdata/' + port;
+	config.port = port
         req.open('GET', config.api)
         req.onload = function() {
           log.innerHTML = JSON.parse(this.responseText).texts;
@@ -300,6 +301,7 @@ sd.onclick = function() {
     req.open('GET', config.api)
     req.onload = function() {
       log.innerHTML = JSON.parse(this.responseText).texts;
+	    config.port = port
 			hello()
 			if(JSON.parse(this.responseText).texts == undefined){
 const element = document.querySelector(
