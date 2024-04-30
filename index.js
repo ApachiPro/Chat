@@ -23,7 +23,7 @@ var system_status = {
     "stream": "offline",
     "numb": 0
   },
-  version: 'Releace, v1.1.0 -MEGA CONFIG UPDATE :smile:'
+  version: 'Releace, v1.1.1 -MEGA CONFIG UPDATE :smile: +hotfix'
 }
   var data = {
     a: true,
@@ -481,8 +481,9 @@ ps.onclick = function() {
     y.onclick = function() {
       sending_img = true;
       cntt.innerHTML = null
+			var txt = prompt("Enter txt")
       link = prompt("Enter url");
-      tab.document.getElementById("intp").value = `<a href=` + link + `> eee</a>`
+      tab.document.getElementById("intp").value = `<a href=` + link + `> `+txt+`</a>`
       send.click();
 
 
