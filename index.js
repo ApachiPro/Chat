@@ -2,11 +2,14 @@ var anonymous_user_id = Math.floor(Math.random() * 9999);
 var config = {
   api: "https://retoolapi.dev/1aDnEH/chatroomdata/1",
   ping_dellay: 2500,
+  enable_ping: true,
+	enable_reciver:true,
   text_color: 'green',
   background_color: 'black',
   border_color: 'green',
   messageCap: 15,
-	port:1
+	reciver_dellay:500,
+  port: 1,
 };
 var system_status = {
   condition: "offline",
@@ -20,94 +23,100 @@ var system_status = {
     "stream": "offline",
     "numb": 0
   },
-  version: 'Releace, v1.1.0 -bug fixes and pinger'
+  version: 'Releace, v1.1.0 -MEGA CONFIG UPDATE :smile:'
 }
-
-var root ='https://retoolapi.dev/1aDnEH/chatroomdata/'
+  var data = {
+    a: true,
+    b: true,
+    c: 500,
+    d: 2000
+  }
+	
+var root = 'https://retoolapi.dev/1aDnEH/chatroomdata/'
 // chat room msg alerts
 
 var enable_notif = true
 
-function hello(){
-let xh2r = new XMLHttpRequest();
-var rand = Math.floor(Math.random() * 5)
-var msg;
-if (rand == 0) {
-  msg = 'has just slid into the dms...'
-} else if (rand == 1) {
-  msg = 'just joined the gc...'
-} else if (rand == 2) {
-  msg = 'joined the chat...'
-} else if (rand == 3) {
-  msg = 'has entered the chat...'
-} else if (rand == 4) {
-  msg = 'just slid in...'
-}
-
-xh2r.open("GET", config.api);
-xh2r.send();
-now = new Date()
-xh2r.onload = function() {
-
-
-  if (JSON.parse(this.responseText).numb >= config.messageCap) {
-    const elementz = document.querySelector(
-      "#put-request-set-headers .date-updated",
-    );
-    const requestOptions = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        texts: `<p1 style="color:yellow">` + "< user: " +
-          anonymous_user_id +
-          ", " + now.toLocaleTimeString() + " >    " +
-          `<b>` + msg + `</b></p1><br><br>`,
-        numb: JSON.parse(this.responseText).numb = 1,
-        CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS += 1,
-        is_new_message: true,
-	key:JSON.parse(this.responseText).key,
-	is_new_ping:true
-      }),
-    };
-    fetch(config.api, requestOptions);
-    system_status.conditions.server = "online"
-    system_status.conditions.stream = "online"
-  } else {
-
-    const elementz = document.querySelector(
-      "#put-request-set-headers .date-updated",
-    );
-    const requestOptions = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        texts: JSON.parse(this.responseText).texts +
-          `<p1 style="color:yellow">` + "< user: " +
-          anonymous_user_id +
-          ", " + now.toLocaleTimeString() + " >    " +
-          `<b>` + msg + `</b></p1><br><br>`,
-        numb: JSON.parse(this.responseText).numb += 1,
-        CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS += 1,
-        is_new_message: true,
-	key:JSON.parse(this.responseText).key,
-		is_new_ping:true
-      }),
-    };
-    fetch(config.api, requestOptions);
-    system_status.conditions.server = "online"
-    system_status.conditions.stream = "online"
-
-
-
-
-
+function hello() {
+  let xh2r = new XMLHttpRequest();
+  var rand = Math.floor(Math.random() * 5)
+  var msg;
+  if (rand == 0) {
+    msg = 'has just slid into the dms...'
+  } else if (rand == 1) {
+    msg = 'just joined the gc...'
+  } else if (rand == 2) {
+    msg = 'joined the chat...'
+  } else if (rand == 3) {
+    msg = 'has entered the chat...'
+  } else if (rand == 4) {
+    msg = 'just slid in...'
   }
 
-};
+  xh2r.open("GET", config.api);
+  xh2r.send();
+  now = new Date()
+  xh2r.onload = function() {
+
+
+    if (JSON.parse(this.responseText).numb >= config.messageCap) {
+      const elementz = document.querySelector(
+        "#put-request-set-headers .date-updated",
+      );
+      const requestOptions = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          texts: `<p1 style="color:yellow">` + "< user: " +
+            anonymous_user_id +
+            ", " + now.toLocaleTimeString() + " >    " +
+            `<b>` + msg + `</b></p1><br><br>`,
+          numb: JSON.parse(this.responseText).numb = 1,
+          CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS += 1,
+          is_new_message: true,
+          key: JSON.parse(this.responseText).key,
+          is_new_ping: true
+        }),
+      };
+      fetch(config.api, requestOptions);
+      system_status.conditions.server = "online"
+      system_status.conditions.stream = "online"
+    } else {
+
+      const elementz = document.querySelector(
+        "#put-request-set-headers .date-updated",
+      );
+      const requestOptions = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          texts: JSON.parse(this.responseText).texts +
+            `<p1 style="color:yellow">` + "< user: " +
+            anonymous_user_id +
+            ", " + now.toLocaleTimeString() + " >    " +
+            `<b>` + msg + `</b></p1><br><br>`,
+          numb: JSON.parse(this.responseText).numb += 1,
+          CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS += 1,
+          is_new_message: true,
+          key: JSON.parse(this.responseText).key,
+          is_new_ping: true
+        }),
+      };
+      fetch(config.api, requestOptions);
+      system_status.conditions.server = "online"
+      system_status.conditions.stream = "online"
+
+
+
+
+
+    }
+
+  };
 
 }
 hello()
@@ -117,11 +126,11 @@ element.innerHTML = `<div id="bg" style="background-color:black">
 <center>
 <img style="top:2%;left:2%;position:absolute" src="https://raw.githack.com/apachipro/chat/main/Resources/logo.png" />
 <div id="config">
-    <button class="button" id="config_lib" style="background-color:black;border-color:green;color:green;width:150px;height:30px;top:1%;right:2%;position:absolute">
+     <button class="button" id="config_lib" style="background-color:black;border-color:green;color:green;width:150px;height:30px;top:1%;right:2%;position:absolute">
         de-bug
     </button>
-    <button id="name_changer" style="background-color:black;border-color:green;color:green;width:150px;height:30px;top:5%;right:2%;position:absolute">
-        Change Name
+    <button id="configs" style="background-color:black;border-color:green;color:green;width:150px;height:30px;top:5%;right:2%;position:absolute">
+        Configs
     </button>
     <button id="sd" style="background-color:black;border-color:green;color:green;width:150px;height:30px;top:9%;right:2%;position:absolute">
         Change server
@@ -151,7 +160,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
 <br>
 
 <center>
-<div style="background-color:rgb(30,30,30);height:85%;width:97.5%" id="frame"> <center><b style="color:lime"id="ping">ping: CONNECTING TO SERVER...</b> <p1 style="color:white"><b>APACHI CHAT ROOM </b><p1 style="color:lime" id="connections"> <b> online users: CONNECTING TO SERVER...</b></p1><b style="color:yellow" id="port">Port:CONNECTING TO SERVER</b></p1><br><br> <p1 style="color:white" id="stream"> CONNECTING TO SERVER... *may take a while </p1>
+<div style="background-color:rgb(30,30,30);height:85%;width:97.5%" id="frame"> <center><b style="color:lime"id="ping">ping: CONNECTING TO SERVER...</b> <p1 style="color:white"><b>APACHI CHAT ROOM </b><p1 style="color:lime" id="connections"> <b> online users: CONNECTING TO SERVER...</b></p1><b style="color:yellow" id="port">Port:CONNECTING TO SERVER</b><b style="color:yellow" id="key"> Key: CONNECTING TO SERVER...</b></p1><br><br> <p1 style="color:white" id="stream"> CONNECTING TO SERVER... *may take a while </p1>
 <br></center>
 
 
@@ -207,7 +216,7 @@ var tab = window
 tab.document.body.appendChild(element);
 var send = tab.document.getElementById("post");
 var log = tab.document.getElementById("stream");
-var name_change = tab.document.getElementById("name_changer");
+var name_change = tab.document.getElementById("configs");
 var connect = tab.document.getElementById("connections");
 var notif = tab.document.getElementById("sd");
 var pingtxt = tab.document.getElementById("ping")
@@ -220,80 +229,83 @@ var porter = tab.document.getElementById("port");
 var sending_img = false;
 var clicked = false;
 var listener_port
+var key = tab.document.getElementById("key")
 // listen to servers
 
-container.onclick = function(){
-	sending_img = true;
-	alert("this will check for new messages in other servers just enter a server port!")
-	const port = prompt("server port *no spaces, some may require a key.");
-	if(port !=="" || port !== null){
-	container.innerHTML = "port: "+port
-	listener_port = port
-	var xhr = new XMLHttpRequest();
-	xhr.open("GET", root+port);
-	xhr.onload = function(){
-	console.log("s")
-	if(JSON.parse(this.responseText).key == undefined){
-			sending_img = false;
-			lr()
-	 }
-	else {
-		var key = prompt("enter server key")
-		if(key == JSON.parse(this.responseText).key){
-				alert("success")
-				lr()
-				sending_img = false;
-	
-			}
-		else{
-			alert("failed");
-			sending_img = false
-		}
-	
-		}
-	
-	}
-	xhr.send()
+container.onclick = function() {
+  sending_img = true;
+  alert("this will check for new messages in other servers just enter a server port!")
+  const port = prompt("server port *no spaces, some may require a key.");
+  if (port !== "" || port !== null) {
+    container.innerHTML = "port: " + port
+    listener_port = port
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", root + port);
+    xhr.onload = function() {
+      console.log("s")
+      if (JSON.parse(this.responseText).key == undefined) {
+        sending_img = false;
+        lr()
+      } else {
+        var key = prompt("enter server key")
+        if (key == JSON.parse(this.responseText).key) {
+          alert("success")
+          lr()
+          sending_img = false;
+
+        } else {
+          alert("failed");
+          sending_img = false
+        }
+
+      }
+
+    }
+    xhr.send()
+  }
 }
-}
+
 function lr() {
   let xhr = new XMLHttpRequest();
-  xhr.open("GET", root+ listener_port);
-	xhr.onload = function() {
-    if(JSON.parse(this.responseText).is_new_ping == true) {
-      container.style.background="red"
-			console.log("yay");
+  xhr.open("GET", root + listener_port);
+  xhr.onload = function() {
+    if (JSON.parse(this.responseText).is_new_ping == true) {
+      container.style.background = "red"
+      console.log("yay");
 
-			const elementz = document.querySelector(
-      "#put-request-set-headers .date-updated",
-    );
-    const requestOptions = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        texts: JSON.parse(this.responseText).texts,
-        numb: JSON.parse(this.responseText).numb,
-        CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
-        is_new_message: JSON.parse(this.responseText).is_new_message,
-	key:JSON.parse(this.responseText).key,
-	is_new_ping:false
-      }),
-    };
-   fetch(root+listener_port, requestOptions);
-	 			function e (){container.style.background ='black'}
-			setTimeout(e,2000)
-		
-			
-			
-			
-			
-			
+      const elementz = document.querySelector(
+        "#put-request-set-headers .date-updated",
+      );
+      const requestOptions = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          texts: JSON.parse(this.responseText).texts,
+          numb: JSON.parse(this.responseText).numb,
+          CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
+          is_new_message: JSON.parse(this.responseText).is_new_message,
+          key: JSON.parse(this.responseText).key,
+          is_new_ping: false
+        }),
+      };
+      fetch(root + listener_port, requestOptions);
+
+      function e() {
+        container.style.background = 'black'
+      }
+      setTimeout(e, 2000)
+
+
+
+
+
+
     }
-		
+
   };
-	  xhr.send();
+  xhr.send();
   setTimeout(lr, 500);
 }
 
@@ -310,121 +322,127 @@ sd.onclick = function() {
   sending_img = true
   alert("to change servers you must enter a number between 1-100 anything above is a private server and must require a ket. no spaces the default channle is 1. private demo server is 100 and key is demo")
   var port = prompt("enter channle number");
-	if (port == null || port == ""){alert("canceled")} else{
-  if (port >= 100) {
-    var req = new XMLHttpRequest()
-    req.open('GET', root + port)
-    req.onload = function() {
-	
-	
+  if (port == null || port == "") {
+    alert("canceled")
+  } else {
+    if (port >= 100) {
+      var req = new XMLHttpRequest()
+      req.open('GET', root + port)
+      req.onload = function() {
 
-      // make new server
-      if (JSON.parse(this.responseText).key == undefined) {
-        alert("you are now creating a private server please memorize the key or copy it down because once you enter it is irriversible. unless you click cancel on next prompt")
-        var entere_key = prompt("Make server key");
-				if(entere_key == "" || entere_key == null){alert("canceling")} else{
-        const element = document.querySelector(
-          "#put-request-set-headers .date-updated",
-        );
-        const requestOptions2 = {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            texts: `<b style="color:red">This is the start of a new server </b>`,
-            numb: 1,
-            CURRENT_CONNECTIONS: 0,
-            is_new_message: true,
-            key: entere_key,
-						is_new_ping:false,
-          }),
-        };
-        fetch('https://retoolapi.dev/1aDnEH/chatroomdata/' + port, requestOptions2);
-				config.port = port
-        config.api = root + port;
-        req.open('GET', config.api)
-        req.onload = function() {
-          log.innerHTML = JSON.parse(this.responseText).texts;
-					hello()
-					
+
+
+        // make new server
+        if (JSON.parse(this.responseText).key == undefined) {
+          alert("you are now creating a private server please memorize the key or copy it down because once you enter it is irriversible. unless you click cancel on next prompt")
+          var entere_key = prompt("Make server key");
+          if (entere_key == "" || entere_key == null) {
+            alert("canceling")
+          } else {
+            const element = document.querySelector(
+              "#put-request-set-headers .date-updated",
+            );
+            const requestOptions2 = {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                texts: `<b style="color:red">This is the start of a new server </b>`,
+                numb: 1,
+                CURRENT_CONNECTIONS: 0,
+                is_new_message: true,
+                key: entere_key,
+                is_new_ping: false,
+              }),
+            };
+            fetch('https://retoolapi.dev/1aDnEH/chatroomdata/' + port, requestOptions2);
+            config.port = port
+            config.api = root + port;
+            req.open('GET', config.api)
+            req.onload = function() {
+              log.innerHTML = JSON.parse(this.responseText).texts;
+              hello()
+
+            }
+            req.send()
+
+
+          }
         }
-        req.send()
+        // enter server key
+        else {
+          var user_key = prompt("Please enter a server key")
+          if (JSON.parse(this.responseText).key == user_key) {
+            alert("success")
+            config.api = root + port
+            config.port = port
+            req.open('GET', config.api)
+            req.onload = function() {
+              log.innerHTML = JSON.parse(this.responseText).texts;
+              hello();
 
+            }
+            req.send()
 
-      }}
-      // enter server key
-      else {
-        var user_key = prompt("Please enter a server key")
-        if (JSON.parse(this.responseText).key == user_key) {
-          alert("success")
-          config.api = root + port
-					config.port = port
-          req.open('GET', config.api)
-          req.onload = function() {
-            log.innerHTML = JSON.parse(this.responseText).texts;
-						hello();
+          } else {
+            alert("failed")
+            config.api = root + '1';
+            config.port = 1
+            req.open('GET', config.api)
+            req.onload = function() {
+              log.innerHTML = JSON.parse(this.responseText).texts
 
+            }
+            req.send()
           }
-          req.send()
 
-        } else {
-          alert("failed")
-          config.api = root+'1';
-					config.port = 1
-          req.open('GET', config.api)
-          req.onload = function() {
-            log.innerHTML = JSON.parse(this.responseText).texts
-
-          }
-          req.send()
         }
 
       }
-
+      req.send()
     }
-    req.send()
+
+    //pub servers
+    else {
+      config.api = root + port;
+      config.port = port
+      var req = new XMLHttpRequest()
+      req.open('GET', config.api)
+      req.onload = function() {
+        log.innerHTML = JSON.parse(this.responseText).texts;
+        hello()
+        if (JSON.parse(this.responseText).texts == undefined) {
+          const element = document.querySelector(
+            "#put-request-set-headers .date-updated",
+          );
+          const requestOptions2 = {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              texts: `<b style="color:red">This is the start of a new server </b>`,
+              numb: 1,
+              CURRENT_CONNECTIONS: 0,
+              is_new_message: true,
+              key: null,
+              is_new_ping: JSON.parse(this.responseText).is_new_ping
+            }),
+          };
+          fetch(root + port, requestOptions2);
+          hello()
+
+        }
+
+
+      }
+      req.send()
+    }
+
+
   }
-
-  //pub servers
-  else {
-    config.api = root + port;
-		config.port = port
-    var req = new XMLHttpRequest()
-    req.open('GET', config.api)
-    req.onload = function() {
-      log.innerHTML = JSON.parse(this.responseText).texts;
-			hello()
-			if(JSON.parse(this.responseText).texts == undefined){
-const element = document.querySelector(
-          "#put-request-set-headers .date-updated",
-        );
-        const requestOptions2 = {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            texts: `<b style="color:red">This is the start of a new server </b>`,
-            numb: 1,
-            CURRENT_CONNECTIONS: 0,
-            is_new_message: true,
-            key:null,
-						is_new_ping:JSON.parse(this.responseText).is_new_ping
-          }),
-        };
-        fetch(root + port, requestOptions2);
-				hello()
-
 }
-			
-
-    }
-    req.send()
-  }
-
-
-}}
 
 ps.onclick = function() {
   if (clicked == true) {
@@ -472,13 +490,6 @@ ps.onclick = function() {
   }
 
 
-}
-
-
-function change_cofig(confi) {
-  if (confi == 1) {
-    config.text_color = "red"
-  }
 }
 
 
@@ -575,8 +586,8 @@ window.addEventListener('beforeunload', function(e) {
         numb: 1,
         CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS - 1,
         is_new_message: true,
-	key:JSON.parse(this.responseText).key,
-		is_new_ping:JSON.parse(this.responseText).is_new_ping
+        key: JSON.parse(this.responseText).key,
+        is_new_ping: JSON.parse(this.responseText).is_new_ping
       }),
     };
     fetch(config.api, requestOptions);
@@ -591,12 +602,18 @@ var reciverr = {
 }
 
 function reciver() {
+
   let xhr = new XMLHttpRequest();
   xhr.open("GET", config.api);
   xhr.send();
   xhr.onload = function() {
     reciverr.connected = true;
     reciverr.status = "ACTIVE";
+    if (JSON.parse(this.responseText).key == undefined) {
+      key.innerHTML = null
+    } else {
+      key.innerHTML = " Key: " + JSON.parse(this.responseText).key
+    }
     if (JSON.parse(this.responseText).is_new_message == true) {
       log.innerHTML = JSON.parse(this.responseText).texts;
     }
@@ -616,8 +633,8 @@ function reciver() {
           numb: JSON.parse(this.responseText).numb,
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
           is_new_message: false,
-	 key:JSON.parse(this.responseText).key,
-	 is_new_ping:JSON.parse(this.responseText).is_new_ping
+          key: JSON.parse(this.responseText).key,
+          is_new_ping: JSON.parse(this.responseText).is_new_ping
         }),
       };
 
@@ -628,8 +645,13 @@ function reciver() {
       system_status.conditions.reciver = "online"
       system_status.conditions.stream = "online"
     }
-  };
-  setTimeout(reciver, 500);
+  }
+	if(config.enable_ping == false){
+		pingtxt.innerHTML =null
+		};
+if(config.enable_reciver == true){
+  setTimeout(reciver, config.reciver_dellay);
+}
 }
 reciver();
 
@@ -645,11 +667,193 @@ tab.document
       setTimeout(550, delete_msg);
     }
   });
+
+
+//configs ==========================
+
+
 name_change.onclick = function() {
-  anonymous_user_id = tab.prompt(
-    "What would you like your name to be? *Please keep it appropriate* *This will not save if you close the tab*",
-  );
+  var win = document.createElement("div");
+  win.innerHTML = `
+<body>
+<center>
+<h1 style="color:green"> Configs </h1>
+<p1 style="color:white">*note only toutch what you understand and know what it does. Some can reduce lag whilst others can increase it. Be carful 🙏</p1><br>
+<button id="return" style="color:green;background-color:black;border-color:green"> return </button> 
+<br>
+<br>
+<br>
+<button class="button" style="background-color:black;border-color:green;color:green;width:125px">enable pinging</button> <p1 class="value"> </p1><br>
+<button class="button" style="background-color:black;border-color:green;color:green;width:125px">ping delay</button> <p1 class="value"> </p1><br>
+<button class="button" style="background-color:black;border-color:green;color:green;width:125px">reciver delay</button> <p1 class="value"> </p1><br>
+<button class="button" style="background-color:black;border-color:green;color:green;width:125px">enable reciver</button> <p1 class="value"> </p1><br>
+<button id="enter" style="background-color:black;border-color:green;color:green;width:125px">enter</button>  <input id="enterr" style="color:green;background-color:black;border-color:green">
+</center>
+
+<style> body{background-color:black}
+
+
+</style>
+`
+  tab.document.body.appendChild(win);
+  tab.document.body.removeChild(element)
+  var returnn = document.getElementById("return");
+  var btns = document.getElementsByClassName("button");
+  var value = document.getElementsByClassName("value")
+	var enter = document.getElementById("enter")
+	
+	document
+  .getElementById("enterr")
+  .addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      enter.click();
+    }
+  });
+	
+	
+	
+	enter.onclick = function(){
+		anonymous_user_id = document.getElementById("enterr").value
+		document.getElementById("enterr").value = ''
+	
+	}
+
+  // easy return
+  returnn.onclick = function() {
+    tab.document.body.appendChild(element);
+    tab.document.body.removeChild(win)
+
+
+  }
+  btns[0].onclick = function() {
+    console.log(config)
+    if (data.a == true){
+      config.enable_ping = false
+    value[0].style = "color:red"
+    value[0].innerHTML = 'off';
+    data.a = false
+  }
+
+  else {
+    config.enable_ping = true
+    value[0].style = "color:lime"
+    value[0].innerHTML = 'on';
+    data.a = true
+		getping()
+  }
+}
+//====================next
+btns[3].onclick = function() {
+    console.log(config)
+    if (data.b == true){
+      config.enable_reciver = false
+    value[3].style = "color:red"
+    value[3].innerHTML = 'off';
+    data.b = false
+  }
+
+  else {
+    config.enable_reciver = true
+    value[3].style = "color:lime"
+    value[3].innerHTML = 'on';
+    data.b = true
+		reciver()
+  }
+}
+
+//=======next========//
+
+  btns[1].onclick = function() {
+    config.ping_dellay +=100 
+				//ifs :/
+		if(config.ping_dellay >= 0 && config.ping_dellay <= 1200){
+    	value[1].style = "color:lime"}
+	  else if(config.ping_dellay >= 1200 && config.ping_dellay <= 2500){
+    	value[1].style = "color:yellow"}
+		else if(config.ping_dellay >= 2500 && config.ping_dellay <= 3700){
+    	value[1].style = "color:orange"}
+		else if(config.ping_dellay >= 3700 && config.ping_dellay <= 5500){
+    	value[1].style = "color:red"}
+		else if(config.ping_dellay >= 7500){
+    	config.ping_dellay=0}
+    value[1].innerHTML = config.ping_dellay;
+
+  }
+  btns[2].onclick = function() {
+    config.reciver_dellay +=100 
+				//ifs :/
+		if(config.reciver_dellay >= 0 && config.reciver_dellay <= 1200){
+    	value[2].style = "color:lime"}
+	  else if(config.reciver_dellay >= 1200 && config.reciver_dellay <= 2500){
+    	value[2].style = "color:yellow"}
+		else if(config.reciver_dellay >= 2500 && config.reciver_dellay <= 5500){
+    	value[2].style = "color:red"}
+		else if(config.reciver_dellay >= 5500){
+    	config.reciver_dellay=0}
+    value[2].innerHTML = config.reciver_dellay;
+
+  }
+
+
+
+//========* SYNC DATA *========//
+ 
+ 
+ 
+ if (data.a == false){
+    value[0].style = "color:red"
+    value[0].innerHTML = 'off';
+  }
+
+  else {
+    value[0].style = "color:lime"
+    value[0].innerHTML = 'on';
+  }
+//=============================next
+ if (data.b == false){
+    value[3].style = "color:red"
+    value[3].innerHTML = 'off';
+  }
+
+  else {
+    value[3].style = "color:lime"
+    value[3].innerHTML = 'on';
+  }
+//=============================next
+		if(config.ping_dellay >= 0 && config.ping_dellay <= 1200){
+    	value[1].style = "color:lime"}
+	  else if(config.ping_dellay >= 1200 && config.ping_dellay <= 2500){
+    	value[1].style = "color:yellow"}
+		else if(config.ping_dellay >= 2500 && config.ping_dellay <= 3700){
+    	value[1].style = "color:orange"}
+		else if(config.ping_dellay >= 3700 && config.ping_dellay <= 5500){
+    	value[1].style = "color:red"}
+		else if(config.ping_dellay >= 7500){
+    	config.ping_dellay=0}
+    value[1].innerHTML = config.ping_dellay;
+		
+//=============================next
+
+		if(config.reciver_dellay >= 0 && config.reciver_dellay <= 1200){
+    	value[2].style = "color:lime"}
+	  else if(config.reciver_dellay >= 1200 && config.reciver_dellay <= 2500){
+    	value[2].style = "color:yellow"}
+		else if(config.reciver_dellay >= 2500 && config.reciver_dellay <= 5500){
+    	value[2].style = "color:red"}
+		else if(config.reciver_dellay >= 5500){
+    	config.reciver=0}
+    value[2].innerHTML = config.reciver_dellay;
+//=============================next
+	document.getElementById("enterr").value = anonymous_user_id;
+
+
 };
+
+
+
+
+
 let xhr = new XMLHttpRequest();
 xhr.open("GET", config.api);
 xhr.send();
@@ -692,8 +896,8 @@ send.onclick = function() {
           numb: value,
           is_new_message: true,
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
-	 key:JSON.parse(this.responseText).key,
-	 	is_new_ping:true
+          key: JSON.parse(this.responseText).key,
+          is_new_ping: true
         }),
       };
       fetch(config.api, requestOptions)
@@ -730,8 +934,8 @@ send.onclick = function() {
           numb: JSON.parse(this.responseText).numb + value,
           is_new_message: true,
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
-						key:JSON.parse(this.responseText).key,
-							is_new_ping:true
+          key: JSON.parse(this.responseText).key,
+          is_new_ping: true
         }),
       };
 
@@ -776,7 +980,7 @@ function pingServer(url, callback) {
 var crash_status
 // Usage
 function getping() {
-porter.innerHTML = " Port: "+config.port
+  porter.innerHTML = " Port: " + config.port
   pingServer(config.api, function(ping) {
     if (ping <= 300) {
       pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:lime">` + ping + 'ms' + `</p1>`;
@@ -830,8 +1034,11 @@ porter.innerHTML = " Port: "+config.port
 
 
     ;
-    system_status.conditions.pinger = "online"
-    setTimeout(getping, 600)
+    system_status.conditions.pinger = "online";
+    if (config.enable_ping == true) {
+      setTimeout(getping, config.ping_dellay)
+    }
+
   })
 
 
