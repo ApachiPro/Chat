@@ -20,9 +20,12 @@ var system_status = {
     "stream": "offline",
     "numb": 0
   },
-  version: 'Releace, v1.0.6 -HOT FIX'
+  version: 'Releace, v1.1.0 -bug fixes and pinger'
 }
+
+var root ='https://retoolapi.dev/1aDnEH/chatroomdata/'
 // chat room msg alerts
+
 var enable_notif = true
 
 function hello(){
@@ -64,7 +67,8 @@ xh2r.onload = function() {
         numb: JSON.parse(this.responseText).numb = 1,
         CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS += 1,
         is_new_message: true,
-	key:JSON.parse(this.responseText).key
+	key:JSON.parse(this.responseText).key,
+	is_new_ping:true
       }),
     };
     fetch(config.api, requestOptions);
@@ -89,7 +93,8 @@ xh2r.onload = function() {
         numb: JSON.parse(this.responseText).numb += 1,
         CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS += 1,
         is_new_message: true,
-	key:JSON.parse(this.responseText).key
+	key:JSON.parse(this.responseText).key,
+		is_new_ping:true
       }),
     };
     fetch(config.api, requestOptions);
@@ -119,8 +124,9 @@ element.innerHTML = `<div id="bg" style="background-color:black">
         Change Name
     </button>
     <button id="sd" style="background-color:black;border-color:green;color:green;width:150px;height:30px;top:9%;right:2%;position:absolute">
-        Change server(s)
+        Change server
     </button>
+		<div style="border-color:green;color:green;width:150px;height:30px;top:13%;right:2%;position:absolute"><button id="server container" style="background-color:black;border-color:green;color:green">+</button> </div>
 </div>
 <div id="info" style="height:85px; width:395px;">
     <font size="6" style="color:green" class="txt"> Apachi Chat Room </font>
@@ -143,6 +149,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
 </div>
 <br>
 <br>
+
 <center>
 <div style="background-color:rgb(30,30,30);height:85%;width:97.5%" id="frame"> <center><b style="color:lime"id="ping">ping: CONNECTING TO SERVER...</b> <p1 style="color:white"><b>APACHI CHAT ROOM </b><p1 style="color:lime" id="connections"> <b> online users: CONNECTING TO SERVER...</b></p1><b style="color:yellow" id="port">Port:CONNECTING TO SERVER</b></p1><br><br> <p1 style="color:white" id="stream"> CONNECTING TO SERVER... *may take a while </p1>
 <br></center>
@@ -208,20 +215,105 @@ var conf = tab.document.getElementById("config_lib")
 var ps = document.getElementById("add")
 var txt = tab.document.getElementsByClassName("txt");
 var cntt = tab.document.getElementById("box");
+var container = tab.document.getElementById("server container")
 var porter = tab.document.getElementById("port");
 var sending_img = false;
 var clicked = false;
+var listener_port
+// listen to servers
+
+container.onclick = function(){
+	sending_img = true;
+	alert("this will check for new messages in other servers just enter a server port!")
+	const port = prompt("server port *no spaces, some may require a key.");
+	if(port !=="" || port !== null){
+	container.innerHTML = "port: "+port
+	listener_port = port
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", root+port);
+	xhr.onload = function(){
+	console.log("s")
+	if(JSON.parse(this.responseText).key == undefined){
+			sending_img = false;
+			lr()
+	 }
+	else {
+		var key = prompt("enter server key")
+		if(key == JSON.parse(this.responseText).key){
+				alert("success")
+				lr()
+				sending_img = false;
+	
+			}
+		else{
+			alert("failed");
+			sending_img = false
+		}
+	
+		}
+	
+	}
+	xhr.send()
+}
+}
+function lr() {
+  let xhr = new XMLHttpRequest();
+  xhr.open("GET", root+ listener_port);
+	xhr.onload = function() {
+    if(JSON.parse(this.responseText).is_new_ping == true) {
+      container.style.background="red"
+			console.log("yay");
+
+			const elementz = document.querySelector(
+      "#put-request-set-headers .date-updated",
+    );
+    const requestOptions = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        texts: JSON.parse(this.responseText).texts,
+        numb: JSON.parse(this.responseText).numb,
+        CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
+        is_new_message: JSON.parse(this.responseText).is_new_message,
+	key:JSON.parse(this.responseText).key,
+	is_new_ping:false
+      }),
+    };
+   fetch(root+listener_port, requestOptions);
+	 			function e (){container.style.background ='black'}
+			setTimeout(e,2000)
+		
+			
+			
+			
+			
+			
+    }
+		
+  };
+	  xhr.send();
+  setTimeout(lr, 500);
+}
+
+
+
+
+
 
 //=======* change servers *===========//
 
+
+
 sd.onclick = function() {
-  sendingg_img = true
+  sending_img = true
   alert("to change servers you must enter a number between 1-100 anything above is a private server and must require a ket. no spaces the default channle is 1. private demo server is 100 and key is demo")
   var port = prompt("enter channle number");
 	if (port == null || port == ""){alert("canceled")} else{
   if (port >= 100) {
     var req = new XMLHttpRequest()
-    req.open('GET', 'https://retoolapi.dev/1aDnEH/chatroomdata/' + port)
+    req.open('GET', root + port)
     req.onload = function() {
 	
 	
@@ -244,13 +336,13 @@ sd.onclick = function() {
             numb: 1,
             CURRENT_CONNECTIONS: 0,
             is_new_message: true,
-            key: entere_key
+            key: entere_key,
+						is_new_ping:false,
           }),
         };
         fetch('https://retoolapi.dev/1aDnEH/chatroomdata/' + port, requestOptions2);
 				config.port = port
-        config.api = 'https://retoolapi.dev/1aDnEH/chatroomdata/' + port;
-	config.port = port
+        config.api = root + port;
         req.open('GET', config.api)
         req.onload = function() {
           log.innerHTML = JSON.parse(this.responseText).texts;
@@ -266,7 +358,7 @@ sd.onclick = function() {
         var user_key = prompt("Please enter a server key")
         if (JSON.parse(this.responseText).key == user_key) {
           alert("success")
-          config.api = 'https://retoolapi.dev/1aDnEH/chatroomdata/' + port
+          config.api = root + port
 					config.port = port
           req.open('GET', config.api)
           req.onload = function() {
@@ -278,7 +370,7 @@ sd.onclick = function() {
 
         } else {
           alert("failed")
-          config.api = 'https://retoolapi.dev/1aDnEH/chatroomdata/1';
+          config.api = root+'1';
 					config.port = 1
           req.open('GET', config.api)
           req.onload = function() {
@@ -296,12 +388,12 @@ sd.onclick = function() {
 
   //pub servers
   else {
-    config.api = 'https://retoolapi.dev/1aDnEH/chatroomdata/' + port
+    config.api = root + port;
+		config.port = port
     var req = new XMLHttpRequest()
     req.open('GET', config.api)
     req.onload = function() {
       log.innerHTML = JSON.parse(this.responseText).texts;
-	    config.port = port
 			hello()
 			if(JSON.parse(this.responseText).texts == undefined){
 const element = document.querySelector(
@@ -317,10 +409,11 @@ const element = document.querySelector(
             numb: 1,
             CURRENT_CONNECTIONS: 0,
             is_new_message: true,
-            key:null
+            key:null,
+						is_new_ping:JSON.parse(this.responseText).is_new_ping
           }),
         };
-        fetch('https://retoolapi.dev/1aDnEH/chatroomdata/' + port, requestOptions2);
+        fetch(root + port, requestOptions2);
 				hello()
 
 }
@@ -450,7 +543,6 @@ conf.onclick = function() {
     } else {
       lines[3].style = "color:red"
     }
-    setInterval(update_lines, 500)
   }
 
   update_lines();
@@ -483,7 +575,8 @@ window.addEventListener('beforeunload', function(e) {
         numb: 1,
         CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS - 1,
         is_new_message: true,
-	key:JSON.parse(this.responseText).key
+	key:JSON.parse(this.responseText).key,
+		is_new_ping:JSON.parse(this.responseText).is_new_ping
       }),
     };
     fetch(config.api, requestOptions);
@@ -523,7 +616,8 @@ function reciver() {
           numb: JSON.parse(this.responseText).numb,
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
           is_new_message: false,
-	 key:JSON.parse(this.responseText).key
+	 key:JSON.parse(this.responseText).key,
+	 is_new_ping:JSON.parse(this.responseText).is_new_ping
         }),
       };
 
@@ -598,7 +692,8 @@ send.onclick = function() {
           numb: value,
           is_new_message: true,
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
-	 key:JSON.parse(this.responseText).key
+	 key:JSON.parse(this.responseText).key,
+	 	is_new_ping:true
         }),
       };
       fetch(config.api, requestOptions)
@@ -635,7 +730,8 @@ send.onclick = function() {
           numb: JSON.parse(this.responseText).numb + value,
           is_new_message: true,
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
-						key:JSON.parse(this.responseText).key
+						key:JSON.parse(this.responseText).key,
+							is_new_ping:true
         }),
       };
 
@@ -704,14 +800,14 @@ porter.innerHTML = " Port: "+config.port
         tab.document.getElementById("pingg").innerHTML = ping;
       }
 
-    } else if (ping >= 1200 && ping <= 5000) {
+    } else if (ping >= 1200 && ping <= 8000) {
       pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:darkred">` + ping + 'ms' + `</p1>`;
       if (crash_status == true) {
         tab.document.getElementById("pingg").innerHTML = ping;
       }
-    } else if (ping >= 5000 && ping <= 8000) {
-      pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:black">` + ping + 'ms' + `</p1>`;
-    } else if (ping >= 8000 && sending_img == false) {
+    } else if (ping >= 8000 && ping <= 20000) {
+      pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:gray">` + ping + 'ms' + `</p1>`;
+    } else if (ping >= 20000 && sending_img == false) {
       var wait_screen = document.createElement("div");
       wait_screen.innerHTML = `<center>
   <h1 style="color:red"> you've crashed</h1>
@@ -719,7 +815,7 @@ porter.innerHTML = " Port: "+config.port
   <p1 style="color:red"> your ping: <p1 style="color:lime;top:50%;left:50%" id="pingg"></p1></p1>
   <br>
   <br>
-  <p1 style="color:lime">your server response time got over 8000s! you have been kicked off because it could be dangerous to our servers. please close the page and open it again once you have a stable connection<br> <b> exiting with code 101</b></p1>
+  <p1 style="color:lime">your server response time got over 20000s! you have been kicked off because it could be dangerous to our servers. please close the page and open it again once you have a stable connection<br> <b> exiting with code 101</b></p1>
   </center>
   <br>
  
