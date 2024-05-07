@@ -123,7 +123,6 @@ hello()
 var element = document.createElement("div");
 element.innerHTML = `<div id="bg" style="background-color:black">
 <title> Apachi Chatroom </title>
-<link rel="icon" type="image/x-icon" href="/Resources/favicon.png">
 <center>
 <img style="top:2%;left:2%;position:absolute" src="https://raw.githack.com/apachipro/chat/main/Resources/logo.png" />
 <div id="config">
@@ -218,7 +217,6 @@ tab.document.body.appendChild(element);
 var send = tab.document.getElementById("post");
 var log = tab.document.getElementById("stream");
 var name_change = tab.document.getElementById("configs");
-var colors = tab.document.getElementById("color");
 var connect = tab.document.getElementById("connections");
 var notif = tab.document.getElementById("sd");
 var pingtxt = tab.document.getElementById("ping")
@@ -678,55 +676,25 @@ tab.document
 name_change.onclick = function() {
   var win = document.createElement("div");
   win.innerHTML = `
-    <body>
-      <center>
-        <h1 style="color:green">
-          Configs
-        </h1>
-        <p1 style="color:white">
-          Please only touch things that you understand. These options could break something.
-        </p1>
-        <br>
-        <button id="return" style="color:green;background-color:black;border-color:green">
-          Return
-        </button> 
-        <br>
-        <br>
-        <br>
-        <button id="colors" style="background-color:black;border-color:green;color:green;width:150px;">
-        Change Color Scheme
-    </button>
-        <button class="button" style="background-color:black;border-color:green;color:green;width:125px">
-          Enable Ping
-        </button>
-        <p1 class="value">
-        </p1>
-        <br>
-        <button class="button" style="background-color:black;border-color:green;color:green;width:125px">
-          Ping Delay
-        </button>
-        <p1 class="value">
-        </p1>
-        <br>
-        <button class="button" style="background-color:black;border-color:green;color:green;width:125px">
-          Reciever Delay
-        </button>
-        <p1 class="value">
-        </p1>
-        <br>
-        <button class="button" style="background-color:black;border-color:green;color:green;width:125px">
-          Enable Reciever
-        </button>
-        <p1 class="value">
-        </p1>
-        <br>
-        <button id="enter" style="background-color:black;border-color:green;color:green;">
-          Update Name
-        </button>
-        <input id="enterr" style="color:green;background-color:black;border-color:green">
-      </center>
-    <style> body{background-color:black}
-    </style>
+<body>
+<center>
+<h1 style="color:green"> Configs </h1>
+<p1 style="color:white">*note only toutch what you understand and know what it does. Some can reduce lag whilst others can increase it. Be carful 🙏</p1><br>
+<button id="return" style="color:green;background-color:black;border-color:green"> return </button> 
+<br>
+<br>
+<br>
+<button class="button" style="background-color:black;border-color:green;color:green;width:125px">enable pinging</button> <p1 class="value"> </p1><br>
+<button class="button" style="background-color:black;border-color:green;color:green;width:125px">ping delay</button> <p1 class="value"> </p1><br>
+<button class="button" style="background-color:black;border-color:green;color:green;width:125px">reciver delay</button> <p1 class="value"> </p1><br>
+<button class="button" style="background-color:black;border-color:green;color:green;width:125px">enable reciver</button> <p1 class="value"> </p1><br>
+<button id="enter" style="background-color:black;border-color:green;color:green;width:125px">enter</button>  <input id="enterr" style="color:green;background-color:black;border-color:green">
+</center>
+
+<style> body{background-color:black}
+
+
+</style>
 `
   tab.document.body.appendChild(win);
   tab.document.body.removeChild(element)
@@ -883,59 +851,8 @@ btns[3].onclick = function() {
 
 };
 
-colors.onclick = function() {
-  var win = document.createElement("div");
-  win.innerHTML = `
-    <body>
-      <center>
-        <h1 style="color:green">
-          Color Changer
-        </h1>
-        <p1 style="color:white">
-          This is where you can change the colors on the main page.
-        </p1>
-        <br>
-        <button id="return" style="color:green;background-color:black;border-color:green">
-          Return
-        </button> 
-        <br>
-        <br>
-        <br>
-        <button class="button" style="background-color:black;border-color:green;color:green;width:125px">
-          Text color
-        </button>
-        <p1 class="value">
-        </p1>
-        <br>
-        <button class="button" style="background-color:black;border-color:green;color:green;width:125px">
-          Background color
-        </button>
-        <p1 class="value">
-        </p1>
-        <br>
-        <button class="button" style="background-color:black;border-color:green;color:green;width:125px">
-          Button color
-        </button>
-        <p1 class="value">
-        </p1>
-        <br>
-        <button class="button" style="background-color:black;border-color:green;color:green;width:125px">
-          Inner button color
-        </button>
-        <p1 class="value">
-        </p1>
-        <br>
-        <button class="button" style="background-color:black;border-color:green;color:green;width:125px">
-          Add button color
-        </button>
-        <p1 class="value">
-        </p1>
-      </center>
-    <style> body{background-color:black}
-    </style>
-`
 
-}
+
 
 
 let xhr = new XMLHttpRequest();
@@ -1097,30 +1014,18 @@ function getping() {
       pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:gray">` + ping + 'ms' + `</p1>`;
     } else if (ping >= 20000 && sending_img == false) {
       var wait_screen = document.createElement("div");
-      wait_screen.innerHTML = `
-      <center>
-        <h1 style="color:red">
-          You've crashed.
-        </h1>
-        <br>
-        <p1 style="color:red">
-          Your ping:
-          <p1 style="color:lime;top:50%;left:50%" id="pingg">
-          </p1>
-        </p1>
-        <br>
-        <br>
-        <p1 style="color:lime">
-          Your server response time got over 20000s! You have been kicked off because it could be dangerous to our servers. Please reload the page.<br> <b> exiting with code 101
-          </b>
-        </p1>
-      </center>
+      wait_screen.innerHTML = `<center>
+  <h1 style="color:red"> you've crashed</h1>
+  <br>
+  <p1 style="color:red"> your ping: <p1 style="color:lime;top:50%;left:50%" id="pingg"></p1></p1>
+  <br>
+  <br>
+  <p1 style="color:lime">your server response time got over 20000s! you have been kicked off because it could be dangerous to our servers. please close the page and open it again once you have a stable connection<br> <b> exiting with code 101</b></p1>
+  </center>
+  <br>
  
  
-      <title>
-        womp womp
-      </title>
-      <style> body{background-color:black}</style>`
+  <title>uh oh</title><style> body{background-color:black}</style>`
       tab.document.body.removeChild(element);
       tab.document.body.appendChild(wait_screen)
       tab.document.getElementById("pingg").innerHTML = ping;
