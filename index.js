@@ -696,6 +696,7 @@ name_change.onclick = function() {
         <button id="colors" style="background-color:black;border-color:green;color:green;width:150px;">
         Change Color Scheme
     </button>
+    <br>
         <button class="button" style="background-color:black;border-color:green;color:green;width:125px">
           Enable Ping
         </button>
