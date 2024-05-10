@@ -23,7 +23,7 @@ var system_status = {
     "stream": "offline",
     "numb": 0
   },
-  version: 'Releace, v1.2.4 -fix :('
+  version: 'Releace, v1.2.5 -fix 2'
 }
 var data = {
   a: true,
@@ -418,7 +418,10 @@ sd.onclick = function() {
                 key: entere_key,
                 is_new_ping: false,
                           prevs: {
-            a: ''
+            a: '',
+						b:'',
+						c:'',
+						d:'',
           }
               }),
             };
@@ -496,6 +499,9 @@ sd.onclick = function() {
               is_new_ping: JSON.parse(this.responseText).is_new_ping,
                         prevs: {
             a: '',
+						b:'',
+						c:'',
+						d:'',
 
           }
             }),
