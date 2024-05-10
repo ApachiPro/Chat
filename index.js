@@ -23,7 +23,7 @@ var system_status = {
     "stream": "offline",
     "numb": 0
   },
-  version: 'Releace, v1.2.2 -Message History :0 & MEGA UPDATE + fix'
+  version: 'Releace, v1.2.3 -Ez fix'
 }
 var data = {
   a: true,
@@ -629,7 +629,7 @@ conf.onclick = function() {
 	var t = document.getElementById("log");
 	var cmd = document.getElementById("command")
 	var count=2
-	var runningCmd={"cmd":null,"buls":null}
+	var runningCmd={"cmd":null,"buls":null,data:null,port:null,a:false}
 	tab.document
   .getElementById("command")
   .addEventListener("keypress", function(event) {
@@ -643,8 +643,8 @@ conf.onclick = function() {
 			
 	//====================== Help ==========================//
 		  if(cmd.value == "help()" || cmd.value == "help" || cmd.value == null || cmd.value == "") {
-				t.innerHTML += `<br>`+"> help() -list of cmds"+`<br>`+"> resKey() -server key reset"+`<br>`+"> resAll() -entire server reset"+`<br>`+'> return() -return to main';
-				count +=4
+				t.innerHTML += `<br>`+"> help() -list of cmds"+`<br>`+"> resKey() -server key reset"+`<br>`+"> resAll() -entire server reset"+`<br>`+'> return() -return to main'+`<br>`+'> getData() -gets data from server(s)'+`<br>`+'> resCon() -resets connections'
+				count +=6
 			
 			}
 	//====================== Return ========================//
@@ -670,8 +670,61 @@ conf.onclick = function() {
 			}
 			xhr.send()
 			}
+	//====================== SEND MSG ======================//	
+			if(cmd.value =="msg()") {
 			
+			t.innerHTML += `<br>`+"> msg()" ;
+			t.innerHTML += `<br>`+"> Enter Server Id" ;
+			runningCmd.cmd = "msg"
+			cmd.value=""
+			count +=2
+			return
+			}
+			if(runningCmd.cmd =="msg") {
 			
+			t.innerHTML += `<br>`+"> Enter Data" ;
+			runningCmd.buls = 'msg'
+			runningCmd.port = cmd.value
+			runningCmd.cmd = null
+			cmd.value=""
+			count +=1
+			return
+			}
+			
+			if (runningCmd.buls == 'msg') {
+			
+			t.innerHTML += `<br>`+"> Running Put Req..." 
+			var xhr= new XMLHttpRequest();
+			xhr.open("GET", root+runningCmd.port)
+			xhr.onload = function(){
+			 const elementz = document.querySelector(
+        "#put-request-set-headers .date-updated",
+      );
+      const requestOptions = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          texts: JSON.parse(this.responseText).texts += `<b style="color:lightblue">`+'< console message > '+cmd.value +`</b> <br>`,
+          numb: JSON.parse(this.responseText).numb,
+          CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
+          is_new_message: true,
+          key: JSON.parse(this.responseText).key,
+          is_new_ping: true,
+					prevs: JSON.parse(this.responseText).prevs
+        }),
+      } ;
+      fetch(root+runningCmd.port, requestOptions);
+			t.innerHTML += `<br>`+'> Server Message Sent!';
+			
+			runningCmd.buls=null
+			runningCmd.cmd = null
+			count +=2
+			cmd.value=""}
+			xhr.send()
+	
+			}
 			
 	//====================== CONNECTION RESET===============//
 			if(cmd.value =="resCon()") {
