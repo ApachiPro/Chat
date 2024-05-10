@@ -23,7 +23,7 @@ var system_status = {
     "stream": "offline",
     "numb": 0
   },
-  version: 'Releace, v1.2.1 -Message History :0 & MEGA UPDATE,hot fix'
+  version: 'Releace, v1.2.2 -Message History :0 & MEGA UPDATE + fix'
 }
 var data = {
   a: true,
@@ -628,15 +628,23 @@ conf.onclick = function() {
 	
 	var t = document.getElementById("log");
 	var cmd = document.getElementById("command")
+	var count=2
 	var runningCmd={"cmd":null,"buls":null}
 	tab.document
   .getElementById("command")
   .addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
       event.preventDefault();
+	//====================== COUNT RES =====================//
+		if(count >=24){
+			t.innerHTML = '> Generated New Line '
+		}
+			
+			
 	//====================== Help ==========================//
 		  if(cmd.value == "help()" || cmd.value == "help" || cmd.value == null || cmd.value == "") {
-				t.innerHTML += `<br>`+"> help() -list of cmds"+`<br>`+"> resKey() -server key reset"+`<br>`+"> resAll() -entire server reset"+`<br>`+'> return() -return to main'
+				t.innerHTML += `<br>`+"> help() -list of cmds"+`<br>`+"> resKey() -server key reset"+`<br>`+"> resAll() -entire server reset"+`<br>`+'> return() -return to main';
+				count +=4
 			
 			}
 	//====================== Return ========================//
@@ -644,14 +652,78 @@ conf.onclick = function() {
 				document.body.appendChild(x)
 				document.body.removeChild(window)
 			}
+	//====================== GET DATA ======================//
+			if(cmd.value =="getData()"){
+				runningCmd.cmd = "getData"
+				t.innerHTML += `<br>`+"> getData()";
+				t.innerHTML += `<br>`+"> Enter Server Id"
+				cmd.value = ''
+				count +=2
+				return
+			}
+			if(runningCmd.cmd=="getData"){
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET",root + cmd.value)
+			xhr.onload = function(){
+			t.innerHTML +=`<br>`+'> '+this.responseText
+			count +=21
+			}
+			xhr.send()
+			}
 			
 			
+			
+	//====================== CONNECTION RESET===============//
+			if(cmd.value =="resCon()") {
+			
+			t.innerHTML += `<br>`+"> resCon()" ;
+			t.innerHTML += `<br>`+"> Enter Server Id" ;
+			runningCmd.cmd = "resCon"
+			cmd.value=""
+			count +=2
+			return
+			}
+			
+			if(runningCmd.cmd == "resCon"){
+			runningCmd.buls = cmd.value
+			t.innerHTML += `<br>`+'> Reseting Server Connections '+ runningCmd.buls+' ...';
+			var xhr= new XMLHttpRequest();
+			xhr.open("GET",root+runningCmd.buls);
+			xhr.onload = function(){
+			 const elementz = document.querySelector(
+        "#put-request-set-headers .date-updated",
+      );
+      const requestOptions = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          texts: JSON.parse(this.responseText).texts,
+          numb: JSON.parse(this.responseText).numb,
+          CURRENT_CONNECTIONS: 0,
+          is_new_message: JSON.parse(this.responseText).is_new_message,
+          key: JSON.parse(this.responseText).key,
+          is_new_ping: JSON.parse(this.responseText).is_new_ping,
+					prevs: JSON.parse(this.responseText).prevs
+        }),
+      };
+      fetch(root+runningCmd.buls, requestOptions);
+			t.innerHTML += `<br>`+'> Server Connections Reset!';
+			runningCmd.buls=null
+			runningCmd.cmd = null
+			count +=2
+			cmd.value=""}
+			xhr.send()
+			}
+		
 			
 	//====================== KEY RESET =====================//
       if(cmd.value =="resKey()") {
 			
 			t.innerHTML += `<br>`+"> resKey()" ;
 			t.innerHTML += `<br>`+"> Enter Server Id *>99" ;
+			count +=2
 			runningCmd.cmd = "resKey"
 			cmd.value=""
 			return
@@ -685,6 +757,7 @@ conf.onclick = function() {
 			t.innerHTML += `<br>`+'> Server Key Reset!';
 			runningCmd.buls=null
 			runningCmd.cmd = null
+			count +=2
 			cmd.value=""}
 			xhr.send()
 			}
@@ -697,6 +770,7 @@ conf.onclick = function() {
 			t.innerHTML += `<br>`+"> resAll()" ;
 			t.innerHTML += `<br>`+"> Enter Server Id " ;
 			runningCmd.cmd = "resAll()"
+			count +=2
 			cmd.value=""
 			return
 			}
@@ -729,6 +803,7 @@ conf.onclick = function() {
 			t.innerHTML += `<br>`+'> Server Reset!';
 			runningCmd.buls=null
 			runningCmd.cmd = null
+			count +=2
 			cmd.value=""
 			}
 			xhr.send()
@@ -1102,12 +1177,10 @@ btns[3].onclick = function() {
 //=============================next
 	document.getElementById("enterr").value = anonymous_user_id;
 
-
-;
-
-colors.onclick = function() {
-  var win = document.createElement("div");
-  win.innerHTML = `
+var fix = document.getElementById('colors')
+fix.onclick = function() {
+  var winw = document.createElement("div");
+  winw.innerHTML = `
     <body>
       <center>
         <h1 style="color:green">
@@ -1155,9 +1228,18 @@ colors.onclick = function() {
       </center>
     <style> body{background-color:black}
     </style>
-`
+`;
+document.body.appendChild(winw);
+document.body.removeChild(win);
+
+var returnnn=document.getElementById("return")
+returnnn.onclick = function(){
+document.body.appendChild(win)
+document.body.removeChild(winw)
+}
 
 }}
+
 
 
 let xhr = new XMLHttpRequest();
@@ -1213,7 +1295,9 @@ send.onclick = function() {
 
           }
         }),
-      };
+      }  
+			fetch(config.api, requestOptions)
+			
       fetch(config.api, requestOptions)
         .then((response) => response.json())
         .then((data) => (element.innerHTML = data.updatedAt))
@@ -1253,7 +1337,6 @@ send.onclick = function() {
 					prevs: JSON.parse(this.responseText).prevs
         }),
       };
-
       fetch(config.api, requestOptions)
         .then((response) => response.json())
         .then((data) => (element.innerHTML = data.updatedAt))
