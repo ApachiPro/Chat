@@ -23,7 +23,7 @@ var system_status = {
     "stream": "offline",
     "numb": 0
   },
-  version: 'Releace, v1.2.3 -Ez fix'
+  version: 'Releace, v1.2.4 -fix :('
 }
 var data = {
   a: true,
@@ -706,7 +706,7 @@ conf.onclick = function() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          texts: JSON.parse(this.responseText).texts += `<b style="color:lightblue">`+'< console message > '+cmd.value +`</b> <br>`,
+          texts: JSON.parse(this.responseText).texts += `<b style="color:blue">`+'< console message > '+cmd.value +`</b> <br>`,
           numb: JSON.parse(this.responseText).numb,
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
           is_new_message: true,
@@ -849,7 +849,12 @@ conf.onclick = function() {
           is_new_message: false,
           key: null,
           is_new_ping: false,
-					prevs: null
+					prevs: {
+					a:'',
+					b:'',
+					c:'',
+					d:''
+					}
         }),
       };
       fetch(root+runningCmd.buls, requestOptions);
