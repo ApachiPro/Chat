@@ -23,7 +23,7 @@ var system_status = {
     "stream": "offline",
     "numb": 0
   },
-  version: 'Releace, v1.2.0 -Message History :0 & MEGA UPDATE'
+  version: 'Releace, v1.2.1 -Message History :0 & MEGA UPDATE,hot fix'
 }
 var data = {
   a: true,
@@ -1103,7 +1103,7 @@ btns[3].onclick = function() {
 	document.getElementById("enterr").value = anonymous_user_id;
 
 
-};
+;
 
 colors.onclick = function() {
   var win = document.createElement("div");
@@ -1157,7 +1157,7 @@ colors.onclick = function() {
     </style>
 `
 
-}
+}}
 
 
 let xhr = new XMLHttpRequest();
