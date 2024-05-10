@@ -3,12 +3,12 @@ var config = {
   api: "https://retoolapi.dev/1aDnEH/chatroomdata/1",
   ping_dellay: 2500,
   enable_ping: true,
-	enable_reciver:true,
+  enable_reciver: true,
   text_color: 'green',
   background_color: 'black',
   border_color: 'green',
   messageCap: 15,
-	reciver_dellay:500,
+  reciver_dellay: 500,
   port: 1,
 };
 var system_status = {
@@ -23,15 +23,15 @@ var system_status = {
     "stream": "offline",
     "numb": 0
   },
-  version: 'Releace, v1.1.1 -MEGA CONFIG UPDATE :smile: +hotfix'
+  version: 'Releace, v1.2.0 -Message History :0 & MEGA UPDATE'
 }
-  var data = {
-    a: true,
-    b: true,
-    c: 500,
-    d: 2000
-  }
-	
+var data = {
+  a: true,
+  b: true,
+  c: 500,
+  d: 2000
+}
+
 var root = 'https://retoolapi.dev/1aDnEH/chatroomdata/'
 // chat room msg alerts
 
@@ -77,7 +77,15 @@ function hello() {
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS += 1,
           is_new_message: true,
           key: JSON.parse(this.responseText).key,
-          is_new_ping: true
+          is_new_ping: true,
+					prevs: {
+            a: JSON.parse(this.responseText).texts,
+						b: JSON.parse(this.responseText).prevs.a,
+						c: JSON.parse(this.responseText).prevs.b,
+						d: JSON.parse(this.responseText).prevs.c,
+					
+
+          }
         }),
       };
       fetch(config.api, requestOptions);
@@ -103,7 +111,8 @@ function hello() {
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS += 1,
           is_new_message: true,
           key: JSON.parse(this.responseText).key,
-          is_new_ping: true
+          is_new_ping: true,
+					prevs: JSON.parse(this.responseText).prevs
         }),
       };
       fetch(config.api, requestOptions);
@@ -123,12 +132,11 @@ hello()
 var element = document.createElement("div");
 element.innerHTML = `<div id="bg" style="background-color:black">
 <title> Apachi Chatroom </title>
-<link rel="icon" type="image/x-icon" href="/Resources/favicon.png">
 <center>
 <img style="top:2%;left:2%;position:absolute" src="https://raw.githack.com/apachipro/chat/main/Resources/logo.png" />
 <div id="config">
      <button class="button" id="config_lib" style="background-color:black;border-color:green;color:green;width:150px;height:30px;top:1%;right:2%;position:absolute">
-        de-bug
+        Development
     </button>
     <button id="configs" style="background-color:black;border-color:green;color:green;width:150px;height:30px;top:5%;right:2%;position:absolute">
         Configs
@@ -153,11 +161,11 @@ element.innerHTML = `<div id="bg" style="background-color:black">
         </b>
         <br>
         <b style="padding-top: 2px;">
-            Messages reset every 15 messages.
-        </b>
+            Messages reset every 15 messages
     </p1>
 </div>
 <br>
+<p1 style="color:lime"><-- <button  style="color:lime;background-color:black;border-color:green" id="d">3</button> , <button  style="color:lime;background-color:black;border-color:green" id="c">2</button> , <button  style="color:lime;background-color:black;border-color:green" id="b">1</button> , <button style="color:lime;background-color:black;border-color:green" id="a"> 0</button> --></p1>
 <br>
 
 <center>
@@ -218,20 +226,72 @@ tab.document.body.appendChild(element);
 var send = tab.document.getElementById("post");
 var log = tab.document.getElementById("stream");
 var name_change = tab.document.getElementById("configs");
-var colors = tab.document.getElementById("color");
 var connect = tab.document.getElementById("connections");
 var notif = tab.document.getElementById("sd");
-var pingtxt = tab.document.getElementById("ping")
-var conf = tab.document.getElementById("config_lib")
-var ps = document.getElementById("add")
+var pingtxt = tab.document.getElementById("ping");
+var conf = tab.document.getElementById("config_lib");
+var ps = document.getElementById("add");
 var txt = tab.document.getElementsByClassName("txt");
 var cntt = tab.document.getElementById("box");
-var container = tab.document.getElementById("server container")
+var container = tab.document.getElementById("server container");
 var porter = tab.document.getElementById("port");
+var a = tab.document.getElementById("a");
+var b = tab.document.getElementById("b");
+var c = tab.document.getElementById("c");
+var d = tab.document.getElementById("d");
 var sending_img = false;
 var clicked = false;
-var listener_port
-var key = tab.document.getElementById("key")
+var listener_port;
+var key = tab.document.getElementById("key");
+
+// history logs
+d.onclick = function(){
+	var his = new XMLHttpRequest();
+	his.open("GET",config.api)
+	his.onload = function(){
+	d.style = "background-color:black;border-color:yellow;color:yellow";
+	c.style = "background-color:black;border-color:green;color:lime"
+	b.style = "background-color:black;border-color:green;color:lime"
+	a.style = "background-color:black;border-color:green;color:lime"
+	log.innerHTML =JSON.parse(this.responseText).prevs.c}
+	his.send()
+}
+c.onclick = function(){
+	var his = new XMLHttpRequest();
+	his.open("GET",config.api)
+	his.onload = function(){
+	c.style = "background-color:black;border-color:yellow;color:yellow"
+	b.style = "background-color:black;border-color:green;color:lime"
+	d.style = "background-color:black;border-color:green;color:lime"
+	a.style = "background-color:black;border-color:green;color:lime"
+	log.innerHTML =JSON.parse(this.responseText).prevs.b}
+	his.send()
+}
+
+b.onclick = function(){
+	var his = new XMLHttpRequest();
+	his.open("GET",config.api)
+	his.onload = function(){
+	b.style = "background-color:black;border-color:yellow;color:yellow"
+	c.style = "background-color:black;border-color:green;color:lime"
+	d.style = "background-color:black;border-color:green;color:lime"
+	a.style = "background-color:black;border-color:green;color:lime"
+	log.innerHTML =JSON.parse(this.responseText).prevs.a}
+	his.send()
+}
+// reset
+a.onclick = function(){
+	var his = new XMLHttpRequest();
+	his.open("GET",config.api)
+	his.onload = function(){
+	a.style = "background-color:black;border-color:yellow;color:yellow"
+	c.style = "background-color:black;border-color:green;color:lime"
+	d.style = "background-color:black;border-color:green;color:lime"
+	b.style = "background-color:black;border-color:green;color:lime"
+	log.innerHTML =JSON.parse(this.responseText).texts}
+	his.send()
+}
+
 // listen to servers
 
 container.onclick = function() {
@@ -264,8 +324,8 @@ container.onclick = function() {
 
     }
     xhr.send()
-  }
-}
+  };
+};
 
 function lr() {
   let xhr = new XMLHttpRequest();
@@ -289,7 +349,8 @@ function lr() {
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
           is_new_message: JSON.parse(this.responseText).is_new_message,
           key: JSON.parse(this.responseText).key,
-          is_new_ping: false
+          is_new_ping: false,
+          prevs: JSON.parse(this.responseText).prevs
         }),
       };
       fetch(root + listener_port, requestOptions);
@@ -350,12 +411,15 @@ sd.onclick = function() {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                texts: `<b style="color:red">This is the start of a new server </b>`,
+                texts: JSON.parse(this.responseText).texts+=`<b style="color:red">This is the start of a new server </b>`,
                 numb: 1,
                 CURRENT_CONNECTIONS: 0,
                 is_new_message: true,
                 key: entere_key,
                 is_new_ping: false,
+                          prevs: {
+            a: ''
+          }
               }),
             };
             fetch('https://retoolapi.dev/1aDnEH/chatroomdata/' + port, requestOptions2);
@@ -429,7 +493,11 @@ sd.onclick = function() {
               CURRENT_CONNECTIONS: 0,
               is_new_message: true,
               key: null,
-              is_new_ping: JSON.parse(this.responseText).is_new_ping
+              is_new_ping: JSON.parse(this.responseText).is_new_ping,
+                        prevs: {
+            a: '',
+
+          }
             }),
           };
           fetch(root + port, requestOptions2);
@@ -483,9 +551,9 @@ ps.onclick = function() {
     y.onclick = function() {
       sending_img = true;
       cntt.innerHTML = null
-			var txt = prompt("Enter txt")
+      var txt = prompt("Enter txt")
       link = prompt("Enter url");
-      tab.document.getElementById("intp").value = `<a href=` + link + `> `+txt+`</a>`
+      tab.document.getElementById("intp").value = `<a href=` + link + `> ` + txt + `</a>`
       send.click();
 
 
@@ -500,9 +568,9 @@ ps.onclick = function() {
 conf.onclick = function() {
   tab.document.body.removeChild(element)
   var x = tab.document.createElement('div')
-  x.innerHTML = `<div class="collum"><b style="color:lime"> <center> De-bug ui *developer purposes only.</b>
+  x.innerHTML = `<div class="collum"><b style="color:lime"> <center> made by daschoolcoder and thefatpotato11 on github</b>
 <br>
-<button id="return" style="color:lime;background-color:black;border-color:white"> ---> RETURN <---</button>
+<button id="return" style="color:lime;background-color:black;border-color:white"> ---> RETURN <---</button> <button id="dev" style="color:lime;background-color:black;border-color:white"> console *dev only </button>
 <br>
 <br>
 <br>
@@ -511,11 +579,26 @@ conf.onclick = function() {
 <b class="line" id="version"> Server:</b><br>
 <b class="line" id="system"> System:</b><br>
 <b class="line" style="color:white">Version: </b>
+<br>
+<br>
+<h1 style="color:white">Future Plans</h1>
+<p1 style="color:white"> closer to green = priority</p1>
+<br>
+<br>
+<p1 style="color:orange">config saves</p1><br>
+<p1 style="color:red"> web domain -will require ads after 1 year cuz dont have job :(</p1><br>
+<p1 style="color:yellow"> bug fixes</p1><br>
+<p1 style="color:yellow"> color configs -the bane of my existanse smh</p1><br>
+<br>
+<p1>
+<br>
+<br>
 <h1 style="color:white">Bug tracker</h1> <p1 style="color:white">/priority list closer to red = severity</p1><br>
 <br>
 <p1 style="color:yellow"> Weird current connections glich with private servers -known bug</p1><br>
-<p1 style="color:yellow"> current connections acting up -working on fix</p1><br>
-<p1 style="color:lime"> thats it :/</p1><br>
+<p1 style="color:lime"> current connections acting up -not right now</p1><br>
+<p1 style="color:lime"> going to third page poping up with undifined -there are not enough messages for the third page</p1><br>
+<p1 style="color:orange"> thats it :/</p1><br>
 <center>
 </div>
 
@@ -525,7 +608,143 @@ conf.onclick = function() {
 `
   tab.document.body.appendChild(x)
   var lines = document.getElementsByClassName("line")
-  var retur = document.getElementById("return")
+  var retur = document.getElementById("return");
+	var console = document.getElementById("dev")
+	
+	console.onclick = function(){
+	alert("DEVELOPER EYES ONLY *requires psw")
+	var psw = prompt("ENTER PASSWORD")
+	var apples = eval(atob('YXRvYignUVZCQlEwaEpYMFJGVmw5VVJVRk5YMFZaUlZNPScp'))
+	if(psw == apples){
+	alert("ya")
+	var window = document.createElement("div")
+	window.innerHTML = `
+	<center><div style="position:absolute;background-color:rgb(20,20,20);width:100%;height:80%"><p1 style="color:white" id="log">> welcome developer to the main control terminal, use this to reset server keys due to inactivity, clear message history and more<br> >BE CAREFUL NOT TO SCREW ANYTHING UP </p1>
+	<input style="position:absolute;left:20%;top:80%;width:60%" id="command">
+	<style>body{background-color:black}</style>
+	`
+	document.body.appendChild(window);
+	document.body.removeChild(x);
+	
+	var t = document.getElementById("log");
+	var cmd = document.getElementById("command")
+	var runningCmd={"cmd":null,"buls":null}
+	tab.document
+  .getElementById("command")
+  .addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+	//====================== Help ==========================//
+		  if(cmd.value == "help()" || cmd.value == "help" || cmd.value == null || cmd.value == "") {
+				t.innerHTML += `<br>`+"> help() -list of cmds"+`<br>`+"> resKey() -server key reset"+`<br>`+"> resAll() -entire server reset"+`<br>`+'> return() -return to main'
+			
+			}
+	//====================== Return ========================//
+			if(cmd.value == "return()") {
+				document.body.appendChild(x)
+				document.body.removeChild(window)
+			}
+			
+			
+			
+	//====================== KEY RESET =====================//
+      if(cmd.value =="resKey()") {
+			
+			t.innerHTML += `<br>`+"> resKey()" ;
+			t.innerHTML += `<br>`+"> Enter Server Id *>99" ;
+			runningCmd.cmd = "resKey"
+			cmd.value=""
+			return
+			}
+			
+			if(runningCmd.cmd == "resKey"){
+			runningCmd.buls = cmd.value
+			t.innerHTML += `<br>`+'> Reseting Server Key '+ runningCmd.buls+' ...';
+			var xhr= new XMLHttpRequest();
+			xhr.open("GET",root+runningCmd.buls);
+			xhr.onload = function(){
+			 const elementz = document.querySelector(
+        "#put-request-set-headers .date-updated",
+      );
+      const requestOptions = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          texts: JSON.parse(this.responseText).texts,
+          numb: JSON.parse(this.responseText).numb = 1,
+          CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
+          is_new_message: false,
+          key: null,
+          is_new_ping: false,
+					prevs: JSON.parse(this.responseText).prevs
+        }),
+      };
+      fetch(root+runningCmd.buls, requestOptions);
+			t.innerHTML += `<br>`+'> Server Key Reset!';
+			runningCmd.buls=null
+			runningCmd.cmd = null
+			cmd.value=""}
+			xhr.send()
+			}
+		
+		
+//======================* TOTAL SERVER RESET *============================//
+
+      if(cmd.value =="resAll()") {
+			
+			t.innerHTML += `<br>`+"> resAll()" ;
+			t.innerHTML += `<br>`+"> Enter Server Id " ;
+			runningCmd.cmd = "resAll()"
+			cmd.value=""
+			return
+			}
+			
+			if(runningCmd.cmd == "resAll()"){
+			runningCmd.buls = cmd.value
+			t.innerHTML += `<br>`+'> Reseting Server '+ runningCmd.buls+' ...';
+			var xhr= new XMLHttpRequest();
+			xhr.open("GET",root+runningCmd.buls);
+			xhr.onload = function(){
+			 const elementz = document.querySelector(
+        "#put-request-set-headers .date-updated",
+      );
+      const requestOptions = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          texts: null,
+          numb: null,
+          CURRENT_CONNECTIONS: null,
+          is_new_message: false,
+          key: null,
+          is_new_ping: false,
+					prevs: null
+        }),
+      };
+      fetch(root+runningCmd.buls, requestOptions);
+			t.innerHTML += `<br>`+'> Server Reset!';
+			runningCmd.buls=null
+			runningCmd.cmd = null
+			cmd.value=""
+			}
+			xhr.send()
+			}
+		
+			
+    }
+  });
+	
+	
+	}
+	else{
+	alert("fail")
+	}
+	} 
+	
   retur.onclick = function() {
     tab.document.body.removeChild(x)
     tab.document.body.appendChild(element)
@@ -590,7 +809,8 @@ window.addEventListener('beforeunload', function(e) {
         CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS - 1,
         is_new_message: true,
         key: JSON.parse(this.responseText).key,
-        is_new_ping: JSON.parse(this.responseText).is_new_ping
+        is_new_ping: JSON.parse(this.responseText).is_new_ping,
+        prevs: JSON.parse(this.responseText).prevs
       }),
     };
     fetch(config.api, requestOptions);
@@ -637,7 +857,8 @@ function reciver() {
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
           is_new_message: false,
           key: JSON.parse(this.responseText).key,
-          is_new_ping: JSON.parse(this.responseText).is_new_ping
+          is_new_ping: JSON.parse(this.responseText).is_new_ping,
+          prevs: JSON.parse(this.responseText).prevs
         }),
       };
 
@@ -649,12 +870,12 @@ function reciver() {
       system_status.conditions.stream = "online"
     }
   }
-	if(config.enable_ping == false){
-		pingtxt.innerHTML =null
-		};
-if(config.enable_reciver == true){
-  setTimeout(reciver, config.reciver_dellay);
-}
+  if (config.enable_ping == false) {
+    pingtxt.innerHTML = null
+  };
+  if (config.enable_reciver == true) {
+    setTimeout(reciver, config.reciver_dellay);
+  }
 }
 reciver();
 
@@ -946,7 +1167,6 @@ xhr.onload = function() {
   log.innerHTML = JSON.parse(this.responseText).texts;
 };
 
-
 send.onclick = function() {
   var value;
   if (sending_img == true) {
@@ -954,12 +1174,13 @@ send.onclick = function() {
   } else {
     value = 1
   }
-
+	var data;
   var new_message = tab.document.getElementById("intp");
   xhr.open("GET", config.api);
   var now = new Date();
   xhr.send();
   xhr.onload = function() {
+	
     log.innerHTML = JSON.parse(this.responseText).texts;
     if (JSON.parse(this.responseText).numb >= config.messageCap) {
       log.innerHTML = "";
@@ -978,11 +1199,19 @@ send.onclick = function() {
             ", " + now.toLocaleTimeString() + " >    " +
             new_message.value +
             `<br><br>`,
-          numb: value,
+          numb: 0,
           is_new_message: true,
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
           key: JSON.parse(this.responseText).key,
-          is_new_ping: true
+          is_new_ping: true,
+					prevs: {
+            a: JSON.parse(this.responseText).texts,
+						b: JSON.parse(this.responseText).prevs.a,
+						c: JSON.parse(this.responseText).prevs.b,
+						d: JSON.parse(this.responseText).prevs.c,
+					
+
+          }
         }),
       };
       fetch(config.api, requestOptions)
@@ -1020,7 +1249,8 @@ send.onclick = function() {
           is_new_message: true,
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
           key: JSON.parse(this.responseText).key,
-          is_new_ping: true
+          is_new_ping: true,
+					prevs: JSON.parse(this.responseText).prevs
         }),
       };
 
@@ -1098,30 +1328,18 @@ function getping() {
       pingtxt.innerHTML = 'Ping: ' + `<p1 style="color:gray">` + ping + 'ms' + `</p1>`;
     } else if (ping >= 20000 && sending_img == false) {
       var wait_screen = document.createElement("div");
-      wait_screen.innerHTML = `
-      <center>
-        <h1 style="color:red">
-          You've crashed.
-        </h1>
-        <br>
-        <p1 style="color:red">
-          Your ping:
-          <p1 style="color:lime;top:50%;left:50%" id="pingg">
-          </p1>
-        </p1>
-        <br>
-        <br>
-        <p1 style="color:lime">
-          Your server response time got over 20000s! You have been kicked off because it could be dangerous to our servers. Please reload the page.<br> <b> exiting with code 101
-          </b>
-        </p1>
-      </center>
+      wait_screen.innerHTML = `<center>
+  <h1 style="color:red"> you've crashed</h1>
+  <br>
+  <p1 style="color:red"> your ping: <p1 style="color:lime;top:50%;left:50%" id="pingg"></p1></p1>
+  <br>
+  <br>
+  <p1 style="color:lime">your server response time got over 20000s! you have been kicked off because it could be dangerous to our servers. please close the page and open it again once you have a stable connection<br> <b> exiting with code 101</b></p1>
+  </center>
+  <br>
  
  
-      <title>
-        womp womp
-      </title>
-      <style> body{background-color:black}</style>`
+  <title>uh oh</title><style> body{background-color:black}</style>`
       tab.document.body.removeChild(element);
       tab.document.body.appendChild(wait_screen)
       tab.document.getElementById("pingg").innerHTML = ping;
