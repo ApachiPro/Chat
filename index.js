@@ -23,7 +23,7 @@ var system_status = {
     "stream": "offline",
     "numb": 0
   },
-  version: 'Releace, v1.2.5 -fix 2'
+  version: 'Releace, v1.2.5 -dev stuff'
 }
 var data = {
   a: true,
@@ -625,8 +625,8 @@ conf.onclick = function() {
 	alert("ya")
 	var window = document.createElement("div")
 	window.innerHTML = `
-	<center><div style="position:absolute;background-color:rgb(20,20,20);width:100%;height:80%"><p1 style="color:white" id="log">> welcome developer to the main control terminal, use this to reset server keys due to inactivity, clear message history and more<br> >BE CAREFUL NOT TO SCREW ANYTHING UP </p1>
-	<input style="position:absolute;left:20%;top:80%;width:60%" id="command">
+	<center><div style="position:absolute;background-color:rgb(20,20,20);width:95%;height:80%"><p1 style="color:white" id="log">> welcome developer to the main control terminal, use this to reset server keys due to inactivity, clear message history and more<br> >BE CAREFUL NOT TO SCREW ANYTHING UP </p1>
+	<input style="position:absolute;left:20%;top:80%;width:55%" id="command"></center>
 	<style>body{background-color:black}</style>
 	`
 	document.body.appendChild(window);
@@ -643,14 +643,15 @@ conf.onclick = function() {
       event.preventDefault();
 	//====================== COUNT RES =====================//
 		if(count >=24){
-			t.innerHTML = '> Generated New Line '
+			t.innerHTML = '> Generated New Line ';
+			count=1
 		}
 			
 			
 	//====================== Help ==========================//
 		  if(cmd.value == "help()" || cmd.value == "help" || cmd.value == null || cmd.value == "") {
-				t.innerHTML += `<br>`+"> help() -list of cmds"+`<br>`+"> resKey() -server key reset"+`<br>`+"> resAll() -entire server reset"+`<br>`+'> return() -return to main'+`<br>`+'> getData() -gets data from server(s)'+`<br>`+'> resCon() -resets connections'
-				count +=6
+				t.innerHTML += `<br>`+"> help() -list of cmds"+`<br>`+"> resKey() -server key reset"+`<br>`+"> resAll() -entire server reset"+`<br>`+'> return() -return to main'+`<br>`+'> getData() -gets data from server(s)'+`<br>`+'> resCon() -resets connections' + `<br>`+'> msg() -messages server' +`<br>`+'> purge() -COMPLETLE REMOVES AND REPLACES ALL SERVER DATA' +`<br>` +'> updateSer() -updates server json' +`<br>`+'> updateAll() -updates all servers json'
+				count +=10
 			
 			}
 	//====================== Return ========================//
@@ -658,6 +659,111 @@ conf.onclick = function() {
 				document.body.appendChild(x)
 				document.body.removeChild(window)
 			}
+ //======================== UPDATE SERVER ================//
+
+      if(cmd.value =="updateSer()") {
+			
+			t.innerHTML += `<br>`+"> updateSer()" ;
+			t.innerHTML += `<br>`+"> Enter Server Id " ;
+			runningCmd.cmd = "update"
+			count +=2
+			cmd.value=""
+			return
+			}
+			
+			if(runningCmd.cmd == "update"){
+			runningCmd.buls = cmd.value
+			t.innerHTML += `<br>`+'> Updating Server '+ runningCmd.buls+' ...';
+			var xhr= new XMLHttpRequest();
+			xhr.open("GET",root+runningCmd.buls);
+			xhr.onload = function(){
+			 const elementz = document.querySelector(
+        "#put-request-set-headers .date-updated",
+      );
+      const requestOptions = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          texts: JSON.parse(this.responseText).texts += `<br>` +`<p1 style="color:lime"> Your Server Has Been Updated! </p1>`,
+          numb: JSON.parse(this.responseText).numb +=1,
+          CURRENT_CONNECTIONS:JSON.parse(this.responseText).CURRENT_CONNECTIONS,
+          is_new_message: JSON.parse(this.responseText).is_new_message,
+          key: JSON.parse(this.responseText).key,
+          is_new_ping: JSON.parse(this.responseText).is_new_ping,
+					prevs: {
+					a:JSON.parse(this.responseText).prevs.a,
+					b:JSON.parse(this.responseText).prevs.b,
+					c:JSON.parse(this.responseText).prevs.c,
+					d:JSON.parse(this.responseText).prevs.d
+					}
+        }),
+      };
+      fetch(root+runningCmd.buls, requestOptions);
+			t.innerHTML += `<br>`+'> Server Reset!';
+			runningCmd.buls=null
+			runningCmd.cmd = null
+			count +=2
+			cmd.value=""
+			}
+			xhr.send()
+			}			
+
+			
+			
+	//====================== PURGE SERVER ==================//
+	
+      if(cmd.value =="purge()") {
+			
+			t.innerHTML += `<br>`+"> purge()" ;
+			t.innerHTML += `<br>`+"> Enter Server Id " ;
+			runningCmd.cmd = "purge"
+			count +=2
+			cmd.value=""
+			return
+			}
+			
+			if(runningCmd.cmd == "purge"){
+			runningCmd.buls = cmd.value
+			t.innerHTML += `<br>`+'> Purging Server '+ runningCmd.buls+' ...';
+			var xhr= new XMLHttpRequest();
+			xhr.open("GET",root+runningCmd.buls);
+			xhr.onload = function(){
+			 const elementz = document.querySelector(
+        "#put-request-set-headers .date-updated",
+      );
+      const requestOptions = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          texts: `<p1 style="color:lime"> < console > your server has been purged this is likely because this server has broke our TOS`,
+          numb: 1,
+          CURRENT_CONNECTIONS: null,
+          is_new_message: false,
+          key: null,
+          is_new_ping: false,
+					prevs: {
+					a:'',
+					b:'',
+					c:'',
+					d:''
+					}
+        }),
+      };
+      fetch(root+runningCmd.buls, requestOptions);
+			t.innerHTML += `<br>`+'> Server Purged!';
+			runningCmd.buls=null
+			runningCmd.cmd = null
+			count +=2
+			cmd.value=""
+			}
+			xhr.send()
+			}
+	
+	
 	//====================== GET DATA ======================//
 			if(cmd.value =="getData()"){
 				runningCmd.cmd = "getData"
@@ -712,7 +818,7 @@ conf.onclick = function() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          texts: JSON.parse(this.responseText).texts += `<b style="color:blue">`+'< console message > '+cmd.value +`</b> <br>`,
+          texts: JSON.parse(this.responseText).texts += `<b style="color:lime">`+'< console message > '+cmd.value +`</b> <br>`,
           numb: JSON.parse(this.responseText).numb,
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
           is_new_message: true,
