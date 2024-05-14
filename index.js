@@ -23,7 +23,7 @@ var system_status = {
     "stream": "offline",
     "numb": 0
   },
-  version: 'Releace, v1.2.5 -dev stuff'
+  version: 'Releace, v1.2.6 -Mini update'
 }
 var data = {
   a: true,
@@ -69,15 +69,17 @@ function hello() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          texts: `<p1 style="color:yellow">` + "< user: " +
-            anonymous_user_id +
-            ", " + now.toLocaleTimeString() + " >    " +
-            `<b>` + msg + `</b></p1><br><br>`,
+          texts: JSON.parse(this.responseText).texts,
           numb: JSON.parse(this.responseText).numb = 1,
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS += 1,
           is_new_message: true,
           key: JSON.parse(this.responseText).key,
           is_new_ping: true,
+					is_new_join: true,
+					joins: JSON.parse(this.responseText).joins += `<p1 style="color:yellow">` + "< user: " +
+            anonymous_user_id +
+            ", " + now.toLocaleTimeString() + " >    " +
+            `<b>` + msg + `</b></p1><br><br>`,
 					prevs: {
             a: JSON.parse(this.responseText).texts,
 						b: JSON.parse(this.responseText).prevs.a,
@@ -102,14 +104,15 @@ function hello() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          texts: JSON.parse(this.responseText).texts +
-            `<p1 style="color:yellow">` + "< user: " +
-            anonymous_user_id +
-            ", " + now.toLocaleTimeString() + " >    " +
-            `<b>` + msg + `</b></p1><br><br>`,
+          texts: JSON.parse(this.responseText).texts,
           numb: JSON.parse(this.responseText).numb += 1,
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS += 1,
           is_new_message: true,
+					is_new_join: true,
+					joins: JSON.parse(this.responseText).joins += `<p1 style="color:yellow">` + "< user: " +
+            anonymous_user_id +
+            ", " + now.toLocaleTimeString() + " >    " +
+            `<b>` + msg + `</b></p1><br><br>`,
           key: JSON.parse(this.responseText).key,
           is_new_ping: true,
 					prevs: JSON.parse(this.responseText).prevs
@@ -165,7 +168,7 @@ element.innerHTML = `<div id="bg" style="background-color:black">
     </p1>
 </div>
 <br>
-<p1 style="color:lime"><-- <button  style="color:lime;background-color:black;border-color:green" id="d">3</button> , <button  style="color:lime;background-color:black;border-color:green" id="c">2</button> , <button  style="color:lime;background-color:black;border-color:green" id="b">1</button> , <button style="color:lime;background-color:black;border-color:green" id="a"> 0</button> --></p1>
+<p1 style="color:lime"><-- <button  style="color:lime;background-color:black;border-color:green" id="d">3</button> , <button  style="color:lime;background-color:black;border-color:green" id="c">2</button> , <button  style="color:lime;background-color:black;border-color:green" id="b">1</button> , <button style="color:yellow;background-color:black;border-color:yellow" id="a"> 0</button> , <button style="color:lime;background-color:black;border-color:green" id="join"> joins</button> --></p1>
 <br>
 
 <center>
@@ -231,6 +234,7 @@ var notif = tab.document.getElementById("sd");
 var pingtxt = tab.document.getElementById("ping");
 var conf = tab.document.getElementById("config_lib");
 var ps = document.getElementById("add");
+var join = document.getElementById("join");
 var txt = tab.document.getElementsByClassName("txt");
 var cntt = tab.document.getElementById("box");
 var container = tab.document.getElementById("server container");
@@ -245,10 +249,22 @@ var listener_port;
 var key = tab.document.getElementById("key");
 
 // history logs
+join.onclick = function(){
+	var his = new XMLHttpRequest();
+	his.open("GET",config.api)
+	his.onload = function(){
+	join.style = "background-color:black;border-color:yellow;color:yellow";
+	c.style = "background-color:black;border-color:green;color:lime"
+	b.style = "background-color:black;border-color:green;color:lime"
+	a.style = "background-color:black;border-color:green;color:lime"
+	log.innerHTML =JSON.parse(this.responseText).joins}
+	his.send()
+}
 d.onclick = function(){
 	var his = new XMLHttpRequest();
 	his.open("GET",config.api)
 	his.onload = function(){
+	join.style = "background-color:black;border-color:green;color:lime"
 	d.style = "background-color:black;border-color:yellow;color:yellow";
 	c.style = "background-color:black;border-color:green;color:lime"
 	b.style = "background-color:black;border-color:green;color:lime"
@@ -260,6 +276,7 @@ c.onclick = function(){
 	var his = new XMLHttpRequest();
 	his.open("GET",config.api)
 	his.onload = function(){
+	join.style = "background-color:black;border-color:green;color:lime"
 	c.style = "background-color:black;border-color:yellow;color:yellow"
 	b.style = "background-color:black;border-color:green;color:lime"
 	d.style = "background-color:black;border-color:green;color:lime"
@@ -272,6 +289,7 @@ b.onclick = function(){
 	var his = new XMLHttpRequest();
 	his.open("GET",config.api)
 	his.onload = function(){
+	join.style = "background-color:black;border-color:green;color:lime"
 	b.style = "background-color:black;border-color:yellow;color:yellow"
 	c.style = "background-color:black;border-color:green;color:lime"
 	d.style = "background-color:black;border-color:green;color:lime"
@@ -284,6 +302,7 @@ a.onclick = function(){
 	var his = new XMLHttpRequest();
 	his.open("GET",config.api)
 	his.onload = function(){
+	join.style = "background-color:black;border-color:green;color:lime"
 	a.style = "background-color:black;border-color:yellow;color:yellow"
 	c.style = "background-color:black;border-color:green;color:lime"
 	d.style = "background-color:black;border-color:green;color:lime"
@@ -416,6 +435,8 @@ sd.onclick = function() {
                 CURRENT_CONNECTIONS: 0,
                 is_new_message: true,
                 key: entere_key,
+								is_new_join: false,
+								joins: '',
                 is_new_ping: false,
                           prevs: {
             a: '',
@@ -496,6 +517,8 @@ sd.onclick = function() {
               CURRENT_CONNECTIONS: 0,
               is_new_message: true,
               key: null,
+							is_new_join: false,
+				    	joins: '',
               is_new_ping: JSON.parse(this.responseText).is_new_ping,
                         prevs: {
             a: '',
@@ -625,8 +648,8 @@ conf.onclick = function() {
 	alert("ya")
 	var window = document.createElement("div")
 	window.innerHTML = `
-	<center><div style="position:absolute;background-color:rgb(20,20,20);width:95%;height:80%"><p1 style="color:white" id="log">> welcome developer to the main control terminal, use this to reset server keys due to inactivity, clear message history and more<br> >BE CAREFUL NOT TO SCREW ANYTHING UP </p1>
-	<input style="position:absolute;left:20%;top:80%;width:55%" id="command"></center>
+	<center><div style="position:absolute;background-color:rgb(20,20,20);width:100%;height:80%"><p1 style="color:white" id="log">> welcome developer to the main control terminal, use this to reset server keys due to inactivity, clear message history and more<br> >BE CAREFUL NOT TO SCREW ANYTHING UP </p1>
+	<input style="position:absolute;left:20%;top:80%;width:60%" id="command">
 	<style>body{background-color:black}</style>
 	`
 	document.body.appendChild(window);
@@ -691,6 +714,8 @@ conf.onclick = function() {
           CURRENT_CONNECTIONS:JSON.parse(this.responseText).CURRENT_CONNECTIONS,
           is_new_message: JSON.parse(this.responseText).is_new_message,
           key: JSON.parse(this.responseText).key,
+					is_new_join:'',
+					joins:'',
           is_new_ping: JSON.parse(this.responseText).is_new_ping,
 					prevs: {
 					a:JSON.parse(this.responseText).prevs.a,
@@ -744,6 +769,8 @@ conf.onclick = function() {
           CURRENT_CONNECTIONS: null,
           is_new_message: false,
           key: null,
+					is_new_join:'',
+					joins:'',
           is_new_ping: false,
 					prevs: {
 					a:'',
@@ -824,6 +851,8 @@ conf.onclick = function() {
           is_new_message: true,
           key: JSON.parse(this.responseText).key,
           is_new_ping: true,
+					is_new_join:JSON.parse(this.responseText).is_new_join,
+					joins:JSON.parse(this.responseText).joins,
 					prevs: JSON.parse(this.responseText).prevs
         }),
       } ;
@@ -870,7 +899,9 @@ conf.onclick = function() {
           is_new_message: JSON.parse(this.responseText).is_new_message,
           key: JSON.parse(this.responseText).key,
           is_new_ping: JSON.parse(this.responseText).is_new_ping,
-					prevs: JSON.parse(this.responseText).prevs
+					prevs: JSON.parse(this.responseText).prevs,
+					is_new_join:JSON.parse(this.responseText).is_new_join,
+					joins:JSON.parse(this.responseText).joins
         }),
       };
       fetch(root+runningCmd.buls, requestOptions);
@@ -915,6 +946,8 @@ conf.onclick = function() {
           is_new_message: false,
           key: null,
           is_new_ping: false,
+					is_new_join:JSON.parse(this.responseText).is_new_join,
+					joins:JSON.parse(this.responseText).joins,
 					prevs: JSON.parse(this.responseText).prevs
         }),
       };
@@ -955,11 +988,13 @@ conf.onclick = function() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          texts: null,
+          texts: JSON.parse(this.responseText).texts,
           numb: null,
           CURRENT_CONNECTIONS: null,
           is_new_message: false,
           key: null,
+					is_new_join:'',
+					joins:'',
           is_new_ping: false,
 					prevs: {
 					a:'',
@@ -1055,7 +1090,9 @@ window.addEventListener('beforeunload', function(e) {
         is_new_message: true,
         key: JSON.parse(this.responseText).key,
         is_new_ping: JSON.parse(this.responseText).is_new_ping,
-        prevs: JSON.parse(this.responseText).prevs
+        prevs: JSON.parse(this.responseText).prevs,
+				is_new_join:JSON.parse(this.responseText).is_new_join,
+				joins:JSON.parse(this.responseText).joins
       }),
     };
     fetch(config.api, requestOptions);
@@ -1063,14 +1100,21 @@ window.addEventListener('beforeunload', function(e) {
 });
 
 // Example usage:
-
+var joi = null
 var reciverr = {
   status: "offline",
   connected: false
 }
 
-function reciver() {
 
+
+//=========================== RECIVER===========================//
+
+
+
+
+function reciver() {
+	var joi = null
   let xhr = new XMLHttpRequest();
   xhr.open("GET", config.api);
   xhr.send();
@@ -1085,7 +1129,14 @@ function reciver() {
     if (JSON.parse(this.responseText).is_new_message == true) {
       log.innerHTML = JSON.parse(this.responseText).texts;
     }
-
+		if(JSON.parse(this.responseText).is_new_join == true){
+		joi = false
+		join.style="color:yellow;border-color:yellow;background-color:black"
+		}
+		else{
+		joi = true
+		join.style="color:lime;border-color:green;background-color:black"
+		}
     if (JSON.parse(this.responseText).is_new_message == true) {
       reciverr.status = "TRIGGERED"
       const element = document.querySelector(
@@ -1103,7 +1154,9 @@ function reciver() {
           is_new_message: false,
           key: JSON.parse(this.responseText).key,
           is_new_ping: JSON.parse(this.responseText).is_new_ping,
-          prevs: JSON.parse(this.responseText).prevs
+          prevs: JSON.parse(this.responseText).prevs,
+					is_new_join:joi,
+					joins:JSON.parse(this.responseText).joins
         }),
       };
 
@@ -1463,7 +1516,9 @@ send.onclick = function() {
 						d: JSON.parse(this.responseText).prevs.c,
 					
 
-          }
+          },
+					is_new_join:JSON.parse(this.responseText).is_new_join,
+					joins:JSON.parse(this.responseText).joins
         }),
       }  
 			fetch(config.api, requestOptions)
@@ -1504,7 +1559,9 @@ send.onclick = function() {
           CURRENT_CONNECTIONS: JSON.parse(this.responseText).CURRENT_CONNECTIONS,
           key: JSON.parse(this.responseText).key,
           is_new_ping: true,
-					prevs: JSON.parse(this.responseText).prevs
+					prevs: JSON.parse(this.responseText).prevs,
+					is_new_join:JSON.parse(this.responseText).is_new_join,
+					joins:JSON.parse(this.responseText).joins
         }),
       };
       fetch(config.api, requestOptions)
