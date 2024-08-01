@@ -1,9 +1,15 @@
-Join the vibe at [ApachiPro.Github.io/Chat](https://apachipro.github.io/chat) or [ApachiPro.RawGitHack.com/Chat](https://raw.githack.com/Apachipro/chat/main/index.html)
+![Preview](https://github.com/user-attachments/assets/39656862-ee9c-4f36-8236-ba70ed25c778)
 
-This is a simple light weight chat room that can be used anywhere as long as you have a browser
+Join the vibe at [ApachiPro.Github.io/Chat](https://apachipro.github.io/chat)
 
-<h1> Open source and modifications</h1>
+This is a simple, light-weight chat room that can be used on any device with a browser.
 
-<b> if you want to use this as a bace for your own chat room please modify the Config.api to you own link and modify the root varible we take pride in how customizable and easy to change apis</b>
+<h1>Open source and modification info</h1>
 
-please customize or use carfuly!
+<b>
+Feel free to fork this repo to create your own chat rooms! ( Don't mind our messy code )
+<br>
+Please modify Config.api with your own link and modify the root varible.
+<br>
+We take pride in how customizable and easy it is to use another API.
+</b>
